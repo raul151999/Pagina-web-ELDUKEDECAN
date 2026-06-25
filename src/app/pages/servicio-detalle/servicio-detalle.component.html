@@ -1,0 +1,69 @@
+<section class="detalle-page">
+  @if (servicio(); as s) {
+    <!-- Hero Header -->
+    <div class="detalle-page__hero" [style.background]="s.imagePath">
+      <div class="container">
+        <div class="detalle-page__hero-content">
+          <div class="detalle-page__icon-wrapper">
+            <span class="detalle-page__icon">{{ s.icon }}</span>
+          </div>
+          <h1 class="detalle-page__title">{{ s.title }}</h1>
+          <p class="detalle-page__subtitle">{{ s.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features & CTA -->
+    <div class="container detalle-page__body">
+      <div class="detalle-page__main">
+        <h2 class="detalle-page__section-title">¿Qué incluye este servicio?</h2>
+        <ul class="detalle-page__features">
+          @for (feature of s.features; track feature) {
+            <li class="detalle-feature">
+              <div class="detalle-feature__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <span>{{ feature }}</span>
+            </li>
+          }
+        </ul>
+
+        <div class="detalle-page__actions">
+          <a routerLink="/agenda-una-cita" class="btn btn--primary btn--lg">
+            Agendar {{ s.title }}
+          </a>
+          <a routerLink="/servicios" class="btn btn--secondary btn--lg">
+            Ver todos los servicios
+          </a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="detalle-page__sidebar">
+        <div class="glass-card info-card">
+          <h3>Horario de atención</h3>
+          <p>Lun - Sáb: 9:00 AM a 8:00 PM</p>
+          <p>Dom: 9:00 AM a 2:00 PM</p>
+        </div>
+        <div class="glass-card info-card">
+          <h3>¿Dudas sobre {{s.title}}?</h3>
+          <p>Escríbenos directamente por WhatsApp y te asesoramos.</p>
+          <a href="#" class="btn btn--whatsapp info-card__btn">Contactar Asesor</a>
+        </div>
+      </aside>
+    </div>
+  } @else {
+    <!-- Not Found State -->
+    <div class="container detalle-page__not-found">
+      <div class="not-found-content">
+        <h1>🐾</h1>
+        <h2>Servicio no encontrado</h2>
+        <p>El servicio que buscas no existe o ha sido movido.</p>
+        <a routerLink="/servicios" class="btn btn--primary">Volver a Servicios</a>
+      </div>
+    </div>
+  }
+</section>

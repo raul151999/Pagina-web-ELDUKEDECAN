@@ -1,0 +1,23 @@
+<section class="brands">
+  <div class="container reveal-up">
+    <h2 class="brands__title">Las marcas favoritas de tu mascota</h2>
+    <p class="brands__subtitle">Trabajamos con las mejores marcas del mercado</p>
+  </div>
+  <div class="brands__marquee reveal-up" style="transition-delay: 150ms;">
+    <div class="brands__track">
+      <!-- Render brands TWICE for infinite loop effect -->
+      @for (brand of brands; track brand.name) {
+        <a [routerLink]="['/marcas', brand.id]" class="brands__item" style="text-decoration: none;">
+          <img [src]="brand.img" [alt]="brand.name" class="brands__logo-img">
+          <span class="brands__name">{{ brand.name }}</span>
+        </a>
+      }
+      @for (brand of brands; track brand.name + '-dup') {
+        <a [routerLink]="['/marcas', brand.id]" class="brands__item" style="text-decoration: none;">
+          <img [src]="brand.img" [alt]="brand.name" class="brands__logo-img">
+          <span class="brands__name">{{ brand.name }}</span>
+        </a>
+      }
+    </div>
+  </div>
+</section>

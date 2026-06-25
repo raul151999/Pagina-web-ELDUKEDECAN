@@ -1,0 +1,79 @@
+<section class="detalle-page">
+  @if (marca(); as m) {
+    <!-- Hero Header -->
+    <div class="detalle-page__hero">
+      <div class="container">
+        <div class="detalle-page__hero-content">
+          @if (m.logo) {
+            <img [src]="m.logo" [alt]="m.name" class="detalle-page__logo" />
+          } @else {
+            <div class="detalle-page__icon-wrapper">
+              <span class="detalle-page__icon">🏷️</span>
+            </div>
+          }
+          <h1 class="detalle-page__title">{{ m.name }}</h1>
+          <p class="detalle-page__subtitle">{{ m.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products -->
+    <div class="container detalle-page__body">
+      <div class="detalle-page__main">
+        <h2 class="detalle-page__section-title">
+          Nuestros Productos {{ m.name }}
+        </h2>
+        <div class="products-grid">
+          @for (product of m.products; track product.name) {
+            <div class="product-card">
+              <div class="product-card__icon">{{ product.icon }}</div>
+              <div class="product-card__content">
+                <h3 class="product-card__title">{{ product.name }}</h3>
+                <p class="product-card__desc">{{ product.description }}</p>
+                <div class="product-card__footer">
+                  <span class="product-card__price">{{ product.price }}</span>
+                  <a
+                    href="https://wa.me/"
+                    class="btn btn--primary btn--sm product-card__btn"
+                    >Comprar</a
+                  >
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="detalle-page__sidebar">
+        <div class="glass-card info-card">
+          <h3>¿Buscas otro producto?</h3>
+          <p>
+            Contamos con el catálogo completo de {{ m.name }}. Si no lo
+            encuentras aquí, consúltanos.
+          </p>
+          <a href="#" class="btn btn--whatsapp info-card__btn"
+            >Consultar Stock</a
+          >
+        </div>
+        <div class="glass-card info-card">
+          <h3>Delivery Gratis</h3>
+          <p>
+            Por compras superiores a S/ 100.00 te lo llevamos gratis a cualquier
+            parte de Trujillo.
+          </p>
+        </div>
+      </aside>
+    </div>
+  } @else {
+    <!-- Not Found State -->
+    <div class="container detalle-page__not-found">
+      <div class="not-found-content">
+        <h1>🐾</h1>
+        <h2>Marca no encontrada</h2>
+        <p>No encontramos productos para la marca seleccionada.</p>
+        <a routerLink="/marcas" class="btn btn--primary">Volver al inicio</a>
+      </div>
+    </div>
+  }
+</section>

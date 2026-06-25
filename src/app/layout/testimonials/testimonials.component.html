@@ -1,0 +1,62 @@
+<section class="testimonials">
+  <div class="container">
+    <div class="testimonials__header reveal-up">
+      <h2 class="testimonials__title">Nuestros clientes nos prefieren</h2>
+      <p class="testimonials__subtitle">Miles de familias confían en nosotros</p>
+      <button class="btn btn--primary" (click)="toggleForm()" style="margin-top: 16px;">
+        {{ showForm ? 'Cancelar' : 'Dejar mi opinión' }}
+      </button>
+    </div>
+
+    <!-- Review Form -->
+    <div class="testimonial-form-wrapper" *ngIf="showForm">
+      <form class="testimonial-form reveal-up" (submit)="addTestimonial($event)">
+        <h3 class="testimonial-form__title">Cuéntanos tu experiencia</h3>
+        
+        <div class="testimonial-form__rating">
+          <span>Calificación:</span>
+          <div class="stars-selector">
+            <span *ngFor="let star of [1,2,3,4,5]" 
+                  class="star-btn" 
+                  [class.active]="star <= newRating"
+                  (click)="setRating(star)">★</span>
+          </div>
+        </div>
+
+        <div class="testimonial-form__group">
+          <input type="text" [(ngModel)]="newName" name="name" placeholder="Tu Nombre y Apellido" required class="testimonial-form__input">
+        </div>
+
+        <div class="testimonial-form__group">
+          <input type="text" [(ngModel)]="newPet" name="pet" placeholder="Nombre de tu mascota (Opcional)" class="testimonial-form__input">
+        </div>
+
+        <div class="testimonial-form__group">
+          <textarea [(ngModel)]="newText" name="text" placeholder="Escribe tu comentario aquí..." required class="testimonial-form__textarea"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primary" [disabled]="!newName || !newText">Publicar Testimonio</button>
+      </form>
+    </div>
+
+    <div class="testimonials__grid reveal-up" style="transition-delay: 200ms;">
+      @for (t of testimonials; track t.name) {
+        <article class="testimonial-card">
+          <div class="testimonial-card__stars">
+            @for (star of [1,2,3,4,5]; track star) {
+              <span class="testimonial-card__star" [class.filled]="star <= t.rating">★</span>
+            }
+          </div>
+          <p class="testimonial-card__text">"{{ t.text }}"</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">{{ t.avatar }}</div>
+            <div>
+              <div class="testimonial-card__name">{{ t.name }}</div>
+              <div class="testimonial-card__pet">Mascota: {{ t.pet }}</div>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

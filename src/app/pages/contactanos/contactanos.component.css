@@ -1,0 +1,213 @@
+.contacto-page {
+  padding: var(--space-16) 0;
+}
+
+/* Header */
+.contacto-page__header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.contacto-page__badge {
+  display: inline-block;
+  background: var(--color-gray-50);
+  color: var(--color-secondary);
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--color-gray-200);
+}
+
+.contacto-page__title {
+  font-size: var(--text-5xl);
+  font-weight: 900;
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+
+.contacto-page__subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-gray-500);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* Quick Contact Cards */
+.contacto-page__quick {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-12);
+}
+
+.quick-card {
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.quick-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.quick-card__icon {
+  font-size: 36px;
+  margin-bottom: var(--space-3);
+}
+
+.quick-card h3 {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+
+.quick-card p {
+  font-size: var(--text-sm);
+  color: var(--color-gray-500);
+}
+
+.quick-card--whatsapp {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border-color: rgba(37, 211, 102, 0.2);
+}
+
+/* Content Layout */
+.contacto-page__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-10);
+}
+
+.contacto-page__section-title {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: var(--space-6);
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.contact-form .form-group {
+  margin-bottom: 0;
+}
+
+.contact-form__submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+/* Success */
+.contact-success {
+  background: var(--color-gray-50);
+  border-radius: var(--radius-xl);
+  padding: var(--space-12);
+  text-align: center;
+}
+
+.contact-success__icon {
+  font-size: 56px;
+  margin-bottom: var(--space-4);
+  animation: bounceIn 0.6s ease-out;
+}
+
+.contact-success h3 {
+  font-size: var(--text-2xl);
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+
+.contact-success p {
+  color: var(--color-gray-500);
+  margin-bottom: var(--space-6);
+}
+
+/* Sedes */
+.sedes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sede-card {
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  transition: all var(--transition-base);
+}
+
+.sede-card:hover {
+  border-color: var(--color-secondary-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.sede-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.sede-card__pin {
+  font-size: 20px;
+}
+
+.sede-card__name {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.sede-card__info {
+  font-size: var(--text-sm);
+  color: var(--color-gray-500);
+  margin-top: var(--space-1);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .contacto-page__quick {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .contacto-page {
+    padding: var(--space-10) 0;
+  }
+
+  .contacto-page__title {
+    font-size: var(--text-4xl);
+  }
+
+  .contacto-page__quick {
+    grid-template-columns: 1fr;
+  }
+
+  .contacto-page__content {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form__row {
+    grid-template-columns: 1fr;
+  }
+}

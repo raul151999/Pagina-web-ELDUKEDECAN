@@ -3,22 +3,34 @@
     <div class="footer__top">
       <div class="footer__brand">
         <a routerLink="/" class="footer__logo">
-          <span class="footer__logo-icon">🐾</span>
-          <span class="footer__logo-text">ELDUKEDECAN</span>
+          <img src="assets/logos/logo-principal.png" alt="Eldukedecan" class="footer__logo-img">
         </a>
         <p class="footer__tagline">Más de 20 años cuidando a tu mascota en Trujillo, Perú.</p>
+        
+        <h4 class="footer__social-title">SÍGUENOS EN LAS REDES</h4>
+        <div class="footer__social-icons">
+          <a href="#" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+        </div>
       </div>
 
       <div class="footer__col">
         <h3 class="footer__col-title">Sedes</h3>
-        <ul class="footer__list">
-          <li>📍 Magnolias</li>
-          <li>📍 Fátima</li>
-          <li>📍 Primavera</li>
-          <li>📍 San Andrés</li>
-          <li>📍 Huanchaco</li>
-          <li>📍 Larco</li>
-          <li>📍 Mansiche</li>
+        <ul class="footer__list footer__list--two-cols">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> Magnolias</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> Fátima</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> Primavera</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> San Andrés</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> Huanchaco</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> Larco</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> Mansiche</li>
         </ul>
       </div>
 
@@ -29,16 +41,19 @@
           <li><a routerLink="/ofertas">Ofertas</a></li>
           <li><a routerLink="/agenda-una-cita">Agenda una cita</a></li>
           <li><a routerLink="/contactanos">Contáctanos</a></li>
+          <li><a routerLink="/terminos">Términos y Condiciones</a></li>
+          <li><a routerLink="/politicas">Políticas de Privacidad</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
         <h3 class="footer__col-title">Contacto</h3>
         <ul class="footer__list">
-          <li>📞 Llámanos</li>
-          <li>✉️ info&#64;eldukedecan.com</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; vertical-align:text-bottom;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Llámanos</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; vertical-align:text-bottom;"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg> info&#64;eldukedecan.com</li>
           <li>
             <a href="#" class="btn btn--whatsapp btn--lg footer__whatsapp">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>
               WhatsApp
             </a>
           </li>
@@ -47,7 +62,25 @@
     </div>
 
     <div class="footer__bottom">
-      <p>&copy; {{ currentYear }} ELDUKEDECAN. Todos los derechos reservados.</p>
+      <div class="footer__payments">
+        <!-- Visa (White) -->
+        <svg viewBox="0 0 38 24" width="48" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Visa">
+          <path d="M28.3 5.3l-2.6 13.5h-4.3l2.6-13.5h4.3zm-10.7 0L14 14.5c-.2.7-.4 1-.9 1.2-1 .4-2.5.8-4 .9l.2-1.8c1.3-.2 2.6-.5 3.3-.8.4-.2.6-.5.8-1.2L16 5.3h4.6zm5 13.5h-4.1l-1-4.8c0-.2 0-.3-.2-.5-.1-.1-.3-.2-.5-.2h-1.9l-1 5.5h-4.2l3-13.5h5.4c1.8 0 3 .8 3.5 2.1.3.8.3 1.8 0 2.8-.5 1.5-1.7 2.3-3.2 2.5l2.2 4.1.8 1.8zm-4.7-6.9c.7 0 1.3-.2 1.6-.7.3-.4.4-1 .3-1.5-.1-.7-.8-1.2-1.7-1.2h-2.1l-.8 3.4h2.7zm11.7.3c-.1-1.3-1-1.9-2.3-2.4-1.2-.5-1.6-.8-1.6-1.3 0-.4.5-.9 1.4-.9 1 0 2 .3 2.7.7l.4-3.1c-.7-.3-1.8-.6-3.1-.6-2.1 0-3.6 1.1-3.6 2.7 0 1.2 1.1 1.8 2.2 2.3 1.1.5 1.5.8 1.5 1.3 0 .6-.7 1-1.6 1-1.2 0-2.3-.4-3.1-.9l-.5 3.3c.8.4 2 .7 3.3.7 2.2-.1 3.8-1.1 3.8-2.8z" fill="#ffffff"/>
+        </svg>
+        
+        <!-- Mastercard (Colored Circles) -->
+        <svg viewBox="0 0 38 24" width="48" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mastercard">
+          <path d="M22 11.6c0-1.9-.7-3.7-1.8-5.1-1.6-1.8-4-3-6.6-3-2.6 0-5 1.2-6.6 3-.7 1.2-1.3 2.5-1.3 4 0 1.6.5 3 1.3 4.2 1.6 1.8 4 3 6.6 3 2.6 0 5-1.2 6.6-3 1.1-1.4 1.8-3.2 1.8-5.1" fill="#ff5f00"/>
+          <path d="M14.5 11.6c0 1.9.7 3.7 1.8 5.1 1-1.2 1.6-2.7 1.6-4.3s-.6-3.1-1.6-4.3c-1.1 1.4-1.8 3.2-1.8 5.1" fill="#ff9e19"/>
+          <path d="M25.4 3.5c-2.6 0-5 1.2-6.6 3-1.1 1.4-1.8 3.2-1.8 5.1 0 1.9.7 3.7 1.8 5.1 1.6 1.8 4 3 6.6 3 3.6 0 6.6-2.9 6.6-6.6s-2.9-6.6-6.6-6.6" fill="#eb001b"/>
+        </svg>
+        
+        <!-- American Express (White) -->
+        <svg viewBox="0 0 38 24" width="48" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="American Express">
+          <path d="M12.9 16.3l-1.9-4.8H8.8v4.8H7V7.5h4l2.4 5.9 2.4-5.9h3.7v8.8h-1.6v-5.2l-2 5.2h-1.4l-2-5.2v5.2h-1.6zm13-8.8h5l-1.7 3.3 1.9 5.5h-2l-1-2.9h-3.4l-1 2.9h-2l2-5.5-1.9-3.3h2l1 1.8 1.1-1.8zm-1.8 4.7h2l-.9-2.5h-.1l-1 2.5zm6.8-4.7h4v1.5h-2v2h1.6v1.4h-1.6v2h2.2v1.5h-4v-8.4zm4.8 6.4h1.4v-1.6h-1.4v1.6zm0-3h1.4v-1.5h-1.4v1.5zm.9 3.6h-1v-4h1v4zm-13.6 1.4v-8.4h4.1v1.5h-2.1v2h1.7v1.4h-1.7v2h2.2v1.5h-4.2zm-2.8-5h1.2V7.5h1.8V9h1V7.5h1.8v3.4h1V7.5h1.7v8.8h-1.7v-3.7h-1v3.7H20v-3.7h-1v3.7h-1.7v-2.3h-1.2v2.3h-1.6v-8.8h1.6v5zm-5.6-3.4h1v1.6h-1V9z" fill="#ffffff"/>
+        </svg>
+      </div>
+      <p class="footer__copyright">&copy; {{ currentYear }} ELDUKEDECAN. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>

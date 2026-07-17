@@ -44,18 +44,18 @@
 /* Service Card */
 .servicio-card {
   background: var(--color-white);
-  border: 1px solid var(--color-gray-200);
+  border: none;
   border-radius: var(--radius-xl);
   padding: var(--space-8);
   transition: all var(--transition-base);
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-3d-card);
 }
 
 .servicio-card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--color-secondary-light);
+  box-shadow: 20px 20px 40px rgba(0, 74, 89, 0.1), -15px -15px 30px rgba(255, 255, 255, 1), inset -2px -2px 5px rgba(0, 74, 89, 0.02), inset 2px 2px 5px rgba(255, 255, 255, 1);
 }
 
 .servicio-card__icon {

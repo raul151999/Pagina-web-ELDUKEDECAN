@@ -84,6 +84,12 @@
   --shadow-glow: 0 0 20px rgba(2, 199, 176, 0.3);
   --shadow-glow-strong: 0 0 40px rgba(2, 199, 176, 0.4);
 
+  /* 3D Claymorphism Shadows */
+  --shadow-3d-card: 15px 15px 35px rgba(0, 74, 89, 0.08), -10px -10px 25px rgba(255, 255, 255, 1), inset -4px -4px 10px rgba(0, 74, 89, 0.05), inset 4px 4px 10px rgba(255, 255, 255, 1);
+  --shadow-3d-btn: 0px 10px 20px rgba(20, 184, 166, 0.3), inset -3px -3px 8px rgba(0, 74, 89, 0.15), inset 3px 3px 8px rgba(255, 255, 255, 0.5);
+  --shadow-3d-btn-active: inset 4px 4px 10px rgba(0, 74, 89, 0.25), inset -4px -4px 10px rgba(255, 255, 255, 0.5);
+
+
   /* Glass */
   --glass-bg: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.15);
@@ -256,42 +262,55 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: translateY(2px);
 }
 
 .btn--primary {
   background: var(--gradient-brand);
   color: var(--color-white);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-3d-btn);
 }
 
 .btn--primary:hover {
-  box-shadow: var(--shadow-glow), var(--shadow-lg);
+  box-shadow: var(--shadow-glow), var(--shadow-3d-btn);
   transform: translateY(-2px);
+}
+
+.btn--primary:active {
+  box-shadow: var(--shadow-3d-btn-active);
 }
 
 .btn--secondary {
   background: var(--color-white);
   color: var(--color-primary);
-  border: 2px solid var(--color-gray-200);
+  border: none;
+  box-shadow: 5px 5px 15px rgba(0, 74, 89, 0.05), -5px -5px 15px rgba(255, 255, 255, 1), inset -2px -2px 5px rgba(0, 74, 89, 0.03), inset 2px 2px 5px rgba(255, 255, 255, 1);
 }
 
 .btn--secondary:hover {
-  border-color: var(--color-secondary-light);
-  box-shadow: var(--shadow-sm);
+  color: var(--color-secondary-light);
+  box-shadow: 6px 6px 18px rgba(0, 74, 89, 0.08), -6px -6px 18px rgba(255, 255, 255, 1);
   transform: translateY(-2px);
+}
+
+.btn--secondary:active {
+  box-shadow: inset 3px 3px 6px rgba(0, 74, 89, 0.1), inset -3px -3px 6px rgba(255, 255, 255, 1);
 }
 
 .btn--whatsapp {
   background: #25d366;
   color: var(--color-white);
-  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+  box-shadow: 0px 8px 15px rgba(37, 211, 102, 0.3), inset -3px -3px 8px rgba(0, 0, 0, 0.15), inset 3px 3px 8px rgba(255, 255, 255, 0.5);
 }
 
 .btn--whatsapp:hover {
   background: #20bd5a;
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4), inset -3px -3px 8px rgba(0, 0, 0, 0.15), inset 3px 3px 8px rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
+}
+
+.btn--whatsapp:active {
+  box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.2), inset -4px -4px 10px rgba(255, 255, 255, 0.4);
 }
 
 .btn--lg {

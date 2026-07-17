@@ -5,7 +5,7 @@
       <div class="container">
         <div class="detalle-page__hero-content">
           <div class="detalle-page__icon-wrapper">
-            <span class="detalle-page__icon">{{ s.icon }}</span>
+            <span class="detalle-page__icon" [innerHTML]="s.icon | safeHtml"></span>
           </div>
           <h1 class="detalle-page__title">{{ s.title }}</h1>
           <p class="detalle-page__subtitle">{{ s.description }}</p>

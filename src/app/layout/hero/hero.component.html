@@ -1,42 +1,4 @@
 <section class="hero">
-  <!-- Search bar -->
-  <div class="hero__search container">
-    <div class="hero__search-wrapper">
-      <div class="hero__search-bar">
-        <svg class="hero__search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input 
-          type="text" 
-          placeholder="¿Qué producto o servicio buscas para tu mascota?" 
-          [(ngModel)]="searchQuery"
-          (input)="onSearchInput()"
-          (focus)="onSearchInput()"
-          (blur)="hideSuggestions()"
-          (keyup.enter)="performSearch()"
-        />
-        <button class="btn btn--primary" (click)="performSearch()">Buscar</button>
-      </div>
-
-      <!-- Suggestions Dropdown -->
-      @if (showSuggestions() && filteredSuggestions().length > 0) {
-        <div class="hero__search-suggestions">
-          @for (item of filteredSuggestions(); track item.title) {
-            <div class="hero__suggestion-item" (click)="selectSuggestion(item)">
-              <span class="suggestion-title">{{ item.title }}</span>
-              <span class="suggestion-category">{{ item.category }}</span>
-            </div>
-          }
-        </div>
-      } @else if (showSuggestions() && searchQuery().trim().length > 0) {
-        <div class="hero__search-suggestions">
-          <div class="hero__suggestion-empty">No se encontraron resultados para "{{ searchQuery() }}"</div>
-        </div>
-      }
-    </div>
-  </div>
-
   <!-- Carousel -->
   <div class="hero__carousel container">
     <div class="hero__slides">
@@ -47,7 +9,7 @@
           [style.background]="slide.gradient"
         >
           <div class="hero__slide-content">
-            <span class="hero__slide-icon">{{ slide.icon }}</span>
+            <span class="hero__slide-icon" [innerHTML]="slide.icon | safeHtml"></span>
             <h1 class="hero__slide-title">{{ slide.title }}</h1>
             <p class="hero__slide-subtitle">{{ slide.subtitle }}</p>
             <div class="hero__slide-actions">
@@ -73,6 +35,44 @@
           (click)="goToSlide($index)"
           [attr.aria-label]="'Ir al slide ' + ($index + 1)"
         ></button>
+      }
+    </div>
+  </div>
+
+  <!-- Search bar -->
+  <div class="hero__search container">
+    <div class="hero__search-wrapper">
+      <div class="hero__search-bar">
+        <svg class="hero__search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="text" 
+          placeholder="¿Qué producto o servicio buscas para tu mascota?" 
+          [(ngModel)]="searchQuery"
+          (input)="onSearchInput()"
+          (focus)="onSearchInput()"
+          (blur)="hideSuggestions()"
+          (keyup.enter)="performSearch()"
+        />
+        <button class="btn btn--primary" (click)="performSearch()">Buscar</button>
+      </div>
+
+      <!-- Suggestions Dropdown -->
+      @if (showSuggestions() && filteredSuggestions().length > 0) {
+        <div class="hero__search-suggestions">
+          @for (item of filteredSuggestions(); track item.title) {
+            <div class="hero__suggestion-item" (mousedown)="selectSuggestion(item)">
+              <span class="suggestion-title">{{ item.title }}</span>
+              <span class="suggestion-category">{{ item.category }}</span>
+            </div>
+          }
+        </div>
+      } @else if (showSuggestions() && searchQuery().trim().length > 0) {
+        <div class="hero__search-suggestions">
+          <div class="hero__suggestion-empty">No se encontraron resultados para "{{ searchQuery() }}"</div>
+        </div>
       }
     </div>
   </div>

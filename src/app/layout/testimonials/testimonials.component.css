@@ -31,8 +31,8 @@
   background: white;
   border-radius: var(--radius-xl);
   padding: var(--space-8);
-  box-shadow: var(--shadow-xs);
-  border: 1px solid var(--color-gray-200);
+  box-shadow: var(--shadow-3d-card);
+  border: none;
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
@@ -52,7 +52,7 @@
 
 .testimonial-card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 20px 20px 40px rgba(0, 74, 89, 0.1), -15px -15px 30px rgba(255, 255, 255, 1), inset -2px -2px 5px rgba(0, 74, 89, 0.02), inset 2px 2px 5px rgba(255, 255, 255, 1);
 }
 
 .testimonial-card:hover::before {
@@ -123,8 +123,8 @@
   background: white;
   border-radius: var(--radius-xl);
   padding: var(--space-6);
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-gray-200);
+  box-shadow: var(--shadow-3d-card);
+  border: none;
 }
 
 .testimonial-form__title {

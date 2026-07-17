@@ -1,7 +1,7 @@
 .footer {
   background: #0a1a1f;
   color: rgba(255, 255, 255, 0.8);
-  padding-top: var(--space-16);
+  padding-top: var(--space-10);
 }
 
 .footer__inner {
@@ -39,12 +39,10 @@
   opacity: 0.85;
 }
 
-.footer__logo-icon {
-  font-size: 28px;
-}
-
-.footer__logo-text {
-  letter-spacing: 1px;
+.footer__logo-img {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
 }
 
 .footer__tagline {
@@ -74,6 +72,13 @@
   margin: 0;
 }
 
+.footer__list--two-cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  column-gap: var(--space-6);
+}
+
 .footer__list li {
   font-size: var(--text-sm);
   color: rgba(255, 255, 255, 0.6);
@@ -90,17 +95,65 @@
   color: white;
 }
 
-.footer__bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  margin-top: var(--space-10);
-  padding: var(--space-6) 0;
-  text-align: center;
+.footer__social-title {
+  margin-top: var(--space-4);
   font-size: var(--text-xs);
-  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 1px;
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+  font-weight: 600;
 }
 
-.footer__bottom p {
+.footer__social-icons {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.footer__social-icons a {
+  color: white;
+  opacity: 0.8;
+  transition: var(--transition-base);
+}
+
+.footer__social-icons a:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: var(--space-8);
+  padding: var(--space-5) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.footer__payments {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.footer__payments svg {
+  height: 24px;
+  width: auto;
+  opacity: 0.8;
+  transition: var(--transition-base);
+}
+
+.footer__payments svg:hover {
+  opacity: 1;
+}
+
+.footer__copyright {
   margin: 0;
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .footer__whatsapp {
@@ -113,5 +166,15 @@
   .footer__top {
     grid-template-columns: 1fr;
     gap: var(--space-8);
+  }
+  
+  .footer__bottom {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .footer__payments {
+    justify-content: center;
   }
 }

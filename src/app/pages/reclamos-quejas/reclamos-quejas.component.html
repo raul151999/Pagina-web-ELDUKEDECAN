@@ -1,0 +1,149 @@
+<section class="reclamos-page">
+  <!-- Encabezado -->
+  <div class="reclamos-header container">
+    <h1>Reclamos y quejas</h1>
+    <p>Conforme a lo establecido en el Código de Protección y Defensa del Consumidor Peruano, esta institución cuenta con un Libro de reclamaciones virtual a su disposición.</p>
+  </div>
+
+  <!-- Formulario -->
+  <div class="form-container">
+    <form>
+      <!-- Sección 1 -->
+      <div class="form-section">
+        <h3 class="form-section__title">1. Identificación del consumidor reclamante</h3>
+        <p class="form-section__subtitle">Rellene el siguiente formulario a continuación</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nombres <span>(obligatorio)</span></label>
+            <input type="text" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Apellidos <span>(obligatorio)</span></label>
+            <input type="text" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">DNI/C.E <span>(obligatorio)</span></label>
+          <input type="text" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Correo electrónico <span>(obligatorio)</span></label>
+          <input type="email" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Celular <span>(obligatorio)</span></label>
+          <input type="tel" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Domicilio <span>(obligatorio)</span></label>
+          <input type="text" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Referencia <span>(obligatorio)</span></label>
+          <input type="text" class="form-input" required>
+        </div>
+      </div>
+
+      <!-- Sección 2 -->
+      <div class="form-section">
+        <h3 class="form-section__title">2. Identificación del bien contratado</h3>
+
+        <div class="form-group">
+          <label class="form-label">Tipo de bien <span>(obligatorio)</span></label>
+          <select class="form-input" required>
+            <option value="" disabled selected>Seleccionar una opción</option>
+            <option value="producto">Producto</option>
+            <option value="servicio">Servicio</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Categoría <span>(obligatorio)</span></label>
+          <select class="form-input" required>
+            <option value="" disabled selected>Seleccionar una opción</option>
+            <option value="clinica">Clínica</option>
+            <option value="petshop">Petshop</option>
+            <option value="grooming">Grooming / Spa</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Sede <span>(obligatorio)</span></label>
+          <select class="form-input" required>
+            <option value="" disabled selected>Seleccionar una opción</option>
+            <option value="fatima">Fátima</option>
+            <option value="primavera">Primavera</option>
+            <option value="magnolias">Las Magnolias</option>
+            <option value="larco">Larco</option>
+            <option value="huanchaco">Huanchaco</option>
+            <option value="san_andres">San Andrés</option>
+            <option value="mansiche">Mansiche</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Nombre del colaborador a cargo de la atención brindada <span>(obligatorio)</span></label>
+          <input type="text" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Datos de tu mascota (Nombre, raza y edad)</label>
+          <input type="text" class="form-input">
+        </div>
+      </div>
+
+      <!-- Sección 3 -->
+      <div class="form-section">
+        <h3 class="form-section__title">3. Detalle de reclamo</h3>
+
+        <div class="form-group">
+          <label class="form-label">Motivo <span>(obligatorio)</span></label>
+          <select class="form-input" required>
+            <option value="" disabled selected>Seleccionar una opción</option>
+            <option value="reclamo">Reclamo</option>
+            <option value="queja">Queja</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Detalle de queja/reclamo. Explícanos, ¿Qué fue lo que sucedió? <span>(obligatorio)</span></label>
+          <textarea class="form-input" required></textarea>
+        </div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="declaracion" required>
+        <label for="declaracion">
+          Declaro ser el usuario del servicio o producto y acepto el contenido del presente formulario manifestando bajo Declaración Jurada la veracidad de los hechos descritos. <span>(obligatorio)</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn-submit">Enviar</button>
+    </form>
+  </div>
+
+  <!-- WhatsApp Banner -->
+  <div class="wa-banner-section">
+    <div class="wa-banner">
+      <div class="wa-banner__image">
+        <img src="assets/images/wa-girl.png" alt="Únete al WhatsApp" onerror="this.src='https://via.placeholder.com/300x300/00e676/ffffff?text=Imagen+Chica+Whatsapp'">
+      </div>
+      
+      <div class="wa-banner__content">
+        <h2 class="wa-banner__title">¡Únete a nuestro<br>canal de WhatsApp!</h2>
+        <p class="wa-banner__subtitle">No te pierdas las mejores promos,<br>cupones, descuentos y sorpresas.</p>
+      </div>
+
+      <div class="wa-banner__action">
+        <a href="https://wa.me/51946959338" target="_blank" class="btn--dark">Unirme ahora</a>
+        <span class="wa-banner__terms">Aplican términos y condiciones.</span>
+      </div>
+    </div>
+  </div>
+</section>

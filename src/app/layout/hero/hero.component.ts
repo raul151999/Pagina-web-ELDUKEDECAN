@@ -5,10 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
 
 interface Slide {
-  title: string;
-  subtitle: string;
-  gradient: string;
-  icon: string;
+  imageUrl: string;
+  alt: string;
 }
 
 interface SearchItem {
@@ -61,24 +59,11 @@ export class HeroComponent implements OnInit, OnDestroy {
   viewers = signal(0);
 
   slides: Slide[] = [
-    {
-      title: 'Cuidamos a tu mascota con amor',
-      subtitle: 'Más de 20 años de experiencia en Trujillo',
-      gradient: 'linear-gradient(135deg, #004a59 0%, #0f766e 100%)',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>',
-    },
-    {
-      title: 'Las mejores marcas de alimento',
-      subtitle: 'Nutrición premium para perros y gatos',
-      gradient: 'linear-gradient(135deg, #0f766e 0%, #02c7b0 100%)',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-4.62 4.62c-.54.54-1.28.84-2.04.84H4v4h3.16c.76 0 1.5-.3 2.04-.84L17 10Z"/></svg>',
-    },
-    {
-      title: 'Agenda tu cita hoy',
-      subtitle: '7 sedes en Trujillo para atenderte',
-      gradient: 'linear-gradient(135deg, #02c7b0 0%, #b6fe3d 100%)',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h8"/><path d="M12 18v-8"/></svg>',
-    },
+    { imageUrl: 'assets/images/carrousel/spa.png', alt: 'Spa Canino' },
+    { imageUrl: 'assets/images/carrousel/petshop.png', alt: 'Pet Shop' },
+    { imageUrl: 'assets/images/carrousel/clinica.png', alt: 'Clínica Veterinaria' },
+    { imageUrl: 'assets/images/carrousel/guarderia.png', alt: 'Guardería' },
+    { imageUrl: 'assets/images/carrousel/party.png', alt: 'Pet Party' }
   ];
 
   private slideInterval: ReturnType<typeof setInterval> | null = null;

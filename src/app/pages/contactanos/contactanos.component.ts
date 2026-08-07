@@ -89,6 +89,7 @@ export class ContactanosComponent {
   contactForm = {
     nombre: '',
     email: '',
+    celular: '',
     asunto: '',
     mensaje: '',
   };
@@ -96,11 +97,31 @@ export class ContactanosComponent {
   messageSent = signal(false);
 
   onSubmit(): void {
+    const marketingPhone = '51946959338';
+    
+    let message = `*Consulta Web - Contáctanos*
+Nombre: ${this.contactForm.nombre}
+Email: ${this.contactForm.email}`;
+
+    if (this.contactForm.celular) {
+      message += `\nCelular: ${this.contactForm.celular}`;
+    }
+
+    message += `\nAsunto: ${this.contactForm.asunto}`;
+
+    if (this.contactForm.mensaje) {
+      message += `\nMensaje: ${this.contactForm.mensaje}`;
+    }
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${marketingPhone}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
     this.messageSent.set(true);
   }
 
   resetForm(): void {
-    this.contactForm = { nombre: '', email: '', asunto: '', mensaje: '' };
+    this.contactForm = { nombre: '', email: '', celular: '', asunto: '', mensaje: '' };
     this.messageSent.set(false);
   }
 }

@@ -1,0 +1,276 @@
+.historia-page {
+  padding: 120px 0 0 0;
+  background-color: #ffffff;
+}
+
+.historia-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.historia-header h1 {
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  margin-bottom: 12px;
+}
+
+.historia-header p {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0 40px 30px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background-color: var(--color-primary);
+}
+
+.timeline-item {
+  position: relative;
+  background-color: #f4f4f4;
+  padding: 24px 30px;
+  margin-bottom: 30px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: -30px;
+  width: 30px;
+  height: 3px;
+  background-color: var(--color-primary);
+}
+
+.timeline-title {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline-text {
+  color: var(--color-gray-600);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Image Placeholder */
+.historia-images {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.collage-grid {
+  display: grid;
+  grid-template-columns: 65% calc(35% - 5px);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  width: 100%;
+  height: 550px;
+}
+
+.collage-item {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  min-height: 0;
+  min-width: 0;
+}
+
+.collage-item--large {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+.collage-item--small-top {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.collage-item--small-bottom {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+@media (max-width: 768px) {
+  .collage-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    height: auto;
+  }
+  .collage-item {
+    height: 300px;
+  }
+  .collage-item--large {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+  }
+  .collage-item--small-top {
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+  }
+  .collage-item--small-bottom {
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+  }
+}
+
+/* Stats Section */
+.historia-stats {
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.historia-stats p {
+  color: var(--color-primary);
+  font-size: 1rem;
+  margin-bottom: 40px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  color: var(--color-primary);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* WhatsApp Banner */
+.wa-banner-section {
+  background-color: var(--color-primary);
+  padding: 0;
+  margin-top: 40px;
+  overflow: hidden;
+}
+
+.wa-banner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 20px;
+  position: relative;
+}
+
+.wa-banner__image {
+  flex: 0 0 300px;
+  position: relative;
+}
+
+.wa-banner__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wa-banner__content {
+  flex: 1;
+  padding: 0 40px;
+}
+
+.wa-banner__title {
+  color: #004d40;
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.wa-banner__subtitle {
+  color: #004d40;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.wa-banner__action {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn--dark {
+  background-color: #004d40;
+  color: white;
+  padding: 16px 40px;
+  border-radius: 40px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.btn--dark:hover {
+  transform: scale(1.05);
+  color: white;
+}
+
+.wa-banner__terms {
+  color: #004d40;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 900px) {
+  .wa-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+  .wa-banner__image {
+    width: 200px;
+    margin: 0 auto;
+  }
+  .wa-banner__content {
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

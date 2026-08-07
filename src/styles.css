@@ -148,13 +148,21 @@ body {
 }
 
 body::before {
-  content: '🐾';
+  content: '';
   position: fixed;
   top: 50%;
   left: 50%;
+  width: 50vw;
+  height: 50vw;
+  max-width: 600px;
+  max-height: 600px;
   transform: translate(-50%, -50%);
-  font-size: 50vw;
-  color: rgba(0, 74, 89, 0.02);
+  background-image: url('assets/logos/logo-principal.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.03;
+  filter: brightness(0);
   z-index: -1;
   pointer-events: none;
   animation: pulseLogo 10s ease-in-out infinite alternate;

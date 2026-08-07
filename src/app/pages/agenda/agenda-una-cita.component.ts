@@ -15,6 +15,8 @@ export class AgendaUnaCitaComponent {
     email: '',
     mascota: '',
     tipoMascota: '',
+    raza: '',
+    edad: '',
     servicio: '',
     sede: '',
     fecha: '',
@@ -52,32 +54,32 @@ export class AgendaUnaCitaComponent {
   onSubmit(): void {
     if (!this.formData.sede) return;
 
-    // 1. Get the phone number for the selected location
-    const phoneNumber = this.sedesData[this.formData.sede];
-
-    // 2. Build the WhatsApp message
-    const message = `Hola ELDUKEDECAN (Sede ${this.formData.sede}), quiero agendar una cita.
+    // Número de Marketing central
+    const marketingPhone = '51946959338';
     
-*Detalles de la Cita:*
- *Nombre:* ${this.formData.nombre}
- *Mascota:* ${this.formData.mascota} (${this.formData.tipoMascota})
- *Servicio:* ${this.formData.servicio}
- *Fecha:* ${this.formData.fecha}
- *Hora Preferida:* ${this.formData.hora}
- *Mi Teléfono:* ${this.formData.telefono}
- *Movilidad:* ${this.formData.movilidad === 'si' ? 'Sí, ' + this.formData.tipoMovilidad : 'No requiere'}
-${this.formData.mensaje ? `\n📝 *Mensaje:* ${this.formData.mensaje}` : ''}
+    // Obtener el número de ticket secuencial de localStorage o empezar en 10065
+    let currentTicket = parseInt(localStorage.getItem('eldukedecan_ticket_counter') || '10065', 10);
+    const ticketId = currentTicket;
     
-¿Tienen disponibilidad en este horario?`;
+    // Incrementar y guardar para la próxima vez
+    localStorage.setItem('eldukedecan_ticket_counter', (currentTicket + 1).toString());
 
-    // 3. Encode the message for a URL
+    // Formatear el mensaje según lo solicitado
+    const message = `Agenda tu cita
+Respuesta #${ticketId}
+Motivo : ${this.formData.servicio}
+Nombre : ${this.formData.nombre}
+WhatsApp : ${this.formData.telefono}
+Día : ${this.formData.fecha}
+Horario : ${this.formData.hora}
+Sede : ${this.formData.sede}
+Nombre de tu mascota, raza y edad : ${this.formData.mascota}, ${this.formData.raza}, ${this.formData.edad}`;
+
+    // Codificar y abrir WhatsApp
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/${marketingPhone}?text=${encodedMessage}`;
 
-    // 4. Open WhatsApp in a new tab
     window.open(whatsappUrl, '_blank');
-
-    // 5. Show success message on the website
     this.submitted.set(true);
   }
 
@@ -88,6 +90,8 @@ ${this.formData.mensaje ? `\n📝 *Mensaje:* ${this.formData.mensaje}` : ''}
       email: '',
       mascota: '',
       tipoMascota: '',
+      raza: '',
+      edad: '',
       servicio: '',
       sede: '',
       fecha: '',

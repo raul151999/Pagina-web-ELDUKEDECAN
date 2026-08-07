@@ -50,4 +50,41 @@ export const routes: Routes = [
         (m) => m.ContactanosComponent
       ),
   },
+  {
+    path: 'nuestra-historia',
+    loadComponent: () =>
+      import('./pages/nuestra-historia/nuestra-historia.component').then(
+        (m) => m.NuestraHistoriaComponent
+      ),
+  },
+  {
+    path: 'nuestro-proposito',
+    loadComponent: () =>
+      import('./pages/nuestro-proposito/nuestro-proposito.component').then(
+        (m) => m.NuestroPropositoComponent
+      ),
+  },
+  {
+    path: 'groomers',
+    loadComponent: () =>
+      import('./pages/groomers/groomers.component').then(
+        (m) => m.GroomersComponent
+      ),
+  },
+  {
+    path: 'veterinarios',
+    loadComponent: () =>
+      import('./pages/veterinarios/veterinarios.component').then(
+        (m) => m.VeterinariosComponent
+      ),
+  },
+  {
+    path: 'reclamos-y-quejas',
+    loadComponent: () =>
+      import('./pages/reclamos-quejas/reclamos-quejas.component').then(
+        (m) => m.ReclamosQuejasComponent
+      ),
+  },
 ];
+
+// Forzar recompilación

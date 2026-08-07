@@ -90,6 +90,32 @@
                 </select>
               </div>
             </div>
+            <div class="agenda-form__row">
+              <div class="form-group">
+                <label for="raza" class="form-label">Raza</label>
+                <input
+                  id="raza"
+                  type="text"
+                  class="form-input"
+                  placeholder="Ej. Golden Retriever, Siames..."
+                  [(ngModel)]="formData.raza"
+                  name="raza"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="edad" class="form-label">Edad</label>
+                <input
+                  id="edad"
+                  type="text"
+                  class="form-input"
+                  placeholder="Ej. 4 años, 6 meses..."
+                  [(ngModel)]="formData.edad"
+                  name="edad"
+                  required
+                />
+              </div>
+            </div>
           </div>
 
           <div class="agenda-form__section">
@@ -153,7 +179,7 @@
                 />
               </div>
             </div>
-            <div class="agenda-form__row">
+            <!-- <div class="agenda-form__row">
               <div class="form-group">
                 <label for="movilidad" class="form-label">¿Requiere movilidad?</label>
                 <select
@@ -184,7 +210,7 @@
                   </select>
                 </div>
               }
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="mensaje" class="form-label">Mensaje adicional (opcional)</label>
               <textarea
@@ -249,7 +275,7 @@
           </div>
           <h3>¿Prefieres llamarnos?</h3>
           <p>Puedes contactarnos directamente para agendar tu cita por teléfono.</p>
-          <a href="#" class="btn btn--whatsapp btn--lg agenda-sidebar-card__btn">
+          <a href="https://wa.me/51946959338" target="_blank" class="btn btn--whatsapp btn--lg agenda-sidebar-card__btn">
             WhatsApp
           </a>
         </div>

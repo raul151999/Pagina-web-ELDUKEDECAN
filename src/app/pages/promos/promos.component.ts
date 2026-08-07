@@ -74,4 +74,9 @@ export class PromosComponent {
       color: '#0284c7',
     },
   ];
+
+  getWhatsAppLink(promo: Promo): string {
+    const phoneNumber = '51946959338'; // Número de marketing
+    return `https://wa.me/${phoneNumber}`;
+  }
 }

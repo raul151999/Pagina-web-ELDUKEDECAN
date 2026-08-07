@@ -114,7 +114,8 @@
 
 .hero__slides {
   position: relative;
-  height: 420px;
+  width: 100%;
+  aspect-ratio: 940 / 590;
 }
 
 .hero__slide {
@@ -178,15 +179,14 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: var(--color-white);
   border: none;
-  color: var(--color-white);
-  width: 48px;
-  height: 48px;
+  color: var(--color-primary);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   font-size: 24px;
+  font-weight: bold;
   cursor: pointer;
   transition: all var(--transition-base);
   z-index: 2;
@@ -194,51 +194,64 @@
   align-items: center;
   justify-content: center;
   line-height: 1;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .hero__arrow:hover {
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--color-gray-50);
   transform: translateY(-50%) scale(1.1);
 }
 
 .hero__arrow--prev {
-  left: 16px;
+  left: 20px;
 }
 
 .hero__arrow--next {
-  right: 16px;
+  right: 20px;
+}
+
+.hero__slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-2xl);
 }
 
 /* --- Carousel Dots --- */
 .hero__dots {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
+  justify-content: flex-start;
   gap: 8px;
-  z-index: 2;
+  margin-top: 16px;
+  padding-left: 16px;
 }
 
 .hero__dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: var(--color-gray-300);
+  border: none;
   transition: all var(--transition-base);
   cursor: pointer;
   padding: 0;
 }
 
 .hero__dot:hover {
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--color-primary);
 }
 
 .hero__dot--active {
-  background: var(--color-white);
+  background: var(--color-primary);
   transform: scale(1.2);
 }
+
+.hero__whatsapp-cta {
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
 
 /* --- Banner Cards --- */
 .hero__banners {
@@ -394,7 +407,7 @@
 
 @media (max-width: 1024px) {
   .hero__slides {
-    height: 320px;
+    height: auto;
   }
 
   .hero__slide-icon {
@@ -450,7 +463,7 @@
 
 @media (max-width: 480px) {
   .hero__slides {
-    height: 260px;
+    height: auto;
   }
 
   .hero__slide-actions {

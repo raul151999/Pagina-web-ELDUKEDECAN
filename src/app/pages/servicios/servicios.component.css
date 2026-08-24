@@ -1,5 +1,6 @@
 .servicios-page {
   padding: var(--space-16) 0;
+  margin-top: var(--header-height);
 }
 
 /* Header */

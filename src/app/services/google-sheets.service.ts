@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { Marca, Product } from '../data/marcas.data';
+import { Marca, Product, OtrasMascotasProduct } from '../data/marcas.data';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,18 @@ export class GoogleSheetsService {
     } catch (error) {
       console.error('Error cargando los datos de Google Sheets:', error);
       return {};
+    }
+  }
+
+  async getOtrasMascotas(): Promise<OtrasMascotasProduct[]> {
+    try {
+      // Usamos el gid específico para la Hoja 2
+      const url = `${this.CSV_URL}&gid=501697905&t=${Date.now()}`;
+      const csvData = await firstValueFrom(this.http.get(url, { responseType: 'text' }));
+      return this.parseCsvToOtrasMascotas(csvData);
+    } catch (error) {
+      console.error('Error cargando los datos de Otras Mascotas:', error);
+      return [];
     }
   }
 
@@ -71,39 +83,129 @@ export class GoogleSheetsService {
       const especie = columns[1];
       const nombreProd = columns[2];
       const descProd = columns[3];
-      const precio = columns[4];
-      const urlImagen = columns.length >= 6 ? columns[5] : undefined;
-      const descLarga = columns.length >= 7 ? columns[6] : undefined;
+      // Nueva estructura de columnas:
+      // 0: Marca
+      // 1: Especie
+      // 2: Nombre Prod
+      // 3: Desc Prod (sin kg)
+      // 4: URL Imagen
+      // 5: Desc Larga
+      // 6: Promocion
+      // 7: Peso 1, 8: Precio 1, 9: Peso 2, 10: Precio 2, etc.
+
+      const urlImagen = columns.length >= 5 ? columns[4] : undefined;
+      const descLarga = columns.length >= 6 ? columns[5] : undefined;
+      const promocion = columns.length >= 7 && columns[6].trim() !== '' ? columns[6].trim() : undefined;
       
       const marcaConfig = baseConfig[marcaNombre] || { id: marcaNombre.toLowerCase().replace(/ /g, '-'), desc: '', logo: '' };
       const marcaId = marcaConfig.id;
 
       if (!marcasData[marcaId]) {
-        marcasData[marcaId] = {
-          id: marcaId,
-          name: marcaNombre === 'Ricocat' ? 'Ricocan' : marcaNombre, // Agrupar Ricocat en Ricocan
-          description: marcaConfig.desc,
-          logo: marcaConfig.logo,
-          products: []
-        };
+        marcasData[marcaId] = { ...marcaConfig, products: [] };
       }
 
       const animalType = especie.toLowerCase().includes('perro') ? 'perro' : 'gato';
       const icon = animalType === 'perro' ? '🐕' : '🐈';
 
+      const nameAndDesc = (nombreProd + ' ' + descProd).toLowerCase();
+      const tags: string[] = [];
+      
+      if (nameAndDesc.includes('puppy') || nameAndDesc.includes('cachorro') || nameAndDesc.includes('kitten') || nameAndDesc.includes('gatito') || nameAndDesc.includes('junior')) {
+        tags.push('cachorro');
+      }
+      if (nameAndDesc.includes('senior') || nameAndDesc.includes('7+')) {
+        tags.push('senior');
+      }
+      if (nameAndDesc.includes('adult') || nameAndDesc.includes('adulto')) {
+        tags.push('adulto');
+      }
+      if (nameAndDesc.includes('urinar') || nameAndDesc.includes('renal') || nameAndDesc.includes('kidney') || nameAndDesc.includes('digest') || nameAndDesc.includes('sensit') || nameAndDesc.includes('sensibil') || nameAndDesc.includes('peso') || nameAndDesc.includes('weight') || nameAndDesc.includes('esteril') || nameAndDesc.includes('steriliz') || nameAndDesc.includes('hipoalerg') || nameAndDesc.includes('cuidado') || nameAndDesc.includes('care') || nameAndDesc.includes('light')) {
+        tags.push('especiales');
+      }
+
+      const variants = [];
+      // Leer las variantes (Peso, Precio, Precio Antiguo) a partir de la columna 7
+      for (let i = 7; i < columns.length; i += 3) {
+        const peso = columns[i]?.trim();
+        const precio = columns[i + 1]?.trim();
+        const precioAntiguo = columns[i + 2]?.trim();
+        
+        if (peso && precio) {
+          variants.push({
+            weight: peso,
+            price: precio,
+            ...(precioAntiguo ? { oldPrice: precioAntiguo } : {}),
+            rawDescription: descProd ? `${descProd} - ${peso}` : peso
+          });
+        }
+      }
+
+      // Si no hay ninguna variante, podemos definir un precio fallback (por ejemplo 0.00 o vacío)
+      const basePrice = variants.length > 0 ? variants[0].price : 'S/ 0.00';
+
       const product: Product = {
         name: nombreProd,
         description: descProd,
-        price: precio,
+        price: basePrice,
         icon: icon,
         animal: animalType,
+        tags: tags,
+        ...(promocion ? { promotion: promocion } : {}),
         ...(urlImagen && urlImagen.startsWith('http') ? { image: urlImagen } : {}),
-        ...(descLarga ? { longDescription: descLarga } : {})
+        ...(descLarga ? { longDescription: descLarga } : {}),
+        variants: variants
       };
 
       marcasData[marcaId].products.push(product);
     }
 
     return marcasData;
+  }
+
+  private parseCsvToOtrasMascotas(csv: string): OtrasMascotasProduct[] {
+    const lines = csv.split('\n');
+    const products: OtrasMascotasProduct[] = [];
+    
+    // Saltar la cabecera (índice 0)
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (!line) continue;
+      
+      const rawColumns = [];
+      let current = '';
+      let inQuotes = false;
+      for (let char of line) {
+        if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+          rawColumns.push(current);
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      rawColumns.push(current);
+      
+      const columns = rawColumns.map(c => c.replace(/^"|"$/g, '').trim());
+
+      // Estructura: Nombre | Descripción | Imagen | Precio
+      if (columns.length < 4) continue;
+
+      const name = columns[0];
+      const description = columns[1];
+      const image = columns[2];
+      const price = columns[3];
+      
+      if (!name) continue;
+
+      products.push({
+        name,
+        description,
+        image,
+        price
+      });
+    }
+
+    return products;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Marca, Product } from '../../data/marcas.data';
+import { Marca, Product, ProductVariant } from '../../data/marcas.data';
 import { GoogleSheetsService } from '../../services/google-sheets.service';
 
 @Component({
@@ -22,16 +22,49 @@ export class MarcaDetalleComponent implements OnInit {
   // Categoría seleccionada por defecto: perro
   selectedCategory = signal<'perro' | 'gato'>('perro');
 
+  // Filtros colapsables
+  isFilterOpen = signal<boolean>(false);
+  selectedTags = signal<Record<string, boolean>>({
+    cachorro: false,
+    adulto: false,
+    senior: false,
+    especiales: false
+  });
+
   // Estado del Modal
   selectedProductForModal = signal<Product | null>(null);
+  selectedVariant = signal<ProductVariant | null>(null);
   productQuantity = signal<number>(1);
 
-  // Computed signal to filter products
-  filteredProducts = computed(() => {
+  // Paginación
+  displayLimit = signal<number>(6);
+
+  // Computed signal to filter all products
+  allFilteredProducts = computed(() => {
     const currentMarca = this.marca();
     if (!currentMarca) return [];
     
-    return currentMarca.products.filter(p => p.animal === this.selectedCategory());
+    const activeTags = Object.entries(this.selectedTags())
+      .filter(([_, isActive]) => isActive)
+      .map(([tag, _]) => tag);
+
+    return currentMarca.products.filter(p => {
+      const matchAnimal = p.animal === this.selectedCategory();
+      
+      // Si no hay filtros seleccionados, mostramos todos los del animal
+      let matchTags = true;
+      if (activeTags.length > 0) {
+        // Mostramos si el producto tiene al menos UNO de los tags seleccionados
+        matchTags = p.tags ? activeTags.some(tag => p.tags!.includes(tag)) : false;
+      }
+      
+      return matchAnimal && matchTags;
+    });
+  });
+
+  // Computed signal for visible products based on displayLimit
+  visibleProducts = computed(() => {
+    return this.allFilteredProducts().slice(0, this.displayLimit());
   });
 
   // Computed signals to check if there are products for a specific category
@@ -43,6 +76,25 @@ export class MarcaDetalleComponent implements OnInit {
   hasGatos = computed(() => {
     const currentMarca = this.marca();
     return currentMarca ? currentMarca.products.some(p => p.animal === 'gato') : false;
+  });
+
+  pricePerKg = computed(() => {
+    const v = this.selectedVariant();
+    if (!v) return '';
+    
+    // Attempt to extract numeric weight and price
+    const kgMatch = v.weight.match(/(\d+(?:\.\d+)?)/);
+    // Remove "S/ " and commas from price before parsing
+    const cleanPrice = v.price.replace(/[^\d.]/g, '');
+    const priceValue = parseFloat(cleanPrice);
+
+    if (kgMatch && !isNaN(priceValue)) {
+      const kg = parseFloat(kgMatch[1]);
+      if (kg > 0) {
+        return `(S/ ${(priceValue / kg).toFixed(2)} x KG)`;
+      }
+    }
+    return '';
   });
 
   async ngOnInit() {
@@ -66,24 +118,52 @@ export class MarcaDetalleComponent implements OnInit {
         this.marca.set(null); 
       }
       
+      this.displayLimit.set(6); // Reset limit on route change
       this.isLoading.set(false);
     });
   }
 
   setCategory(category: 'perro' | 'gato') {
     this.selectedCategory.set(category);
+    this.displayLimit.set(6); // Reset limit on category change
+  }
+
+  toggleFilter() {
+    this.isFilterOpen.update(v => !v);
+  }
+
+  toggleTag(tag: string) {
+    this.selectedTags.update(current => ({
+      ...current,
+      [tag]: !current[tag]
+    }));
+    this.displayLimit.set(6); // Reset limit on filter change
+  }
+
+  loadMore() {
+    this.displayLimit.update(current => current + 6);
   }
 
   // --- Modal Logic ---
   openModal(product: Product) {
     this.selectedProductForModal.set(product);
+    if (product.variants && product.variants.length > 0) {
+      this.selectedVariant.set(product.variants[0]);
+    } else {
+      this.selectedVariant.set(null);
+    }
     this.productQuantity.set(1);
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
   }
 
   closeModal() {
     this.selectedProductForModal.set(null);
+    this.selectedVariant.set(null);
     document.body.style.overflow = '';
+  }
+
+  selectVariant(variant: ProductVariant) {
+    this.selectedVariant.set(variant);
   }
 
   incrementQuantity() {
@@ -96,12 +176,19 @@ export class MarcaDetalleComponent implements OnInit {
 
   getWhatsAppLink(): string {
     const p = this.selectedProductForModal();
+    const v = this.selectedVariant();
     const m = this.marca();
     if (!p || !m) return 'https://wa.me/51946959338';
 
-    const text = `Hola eldukedecan, quiero adquirir este producto.
-Producto: ${m.name} - ${p.name} - ${p.description}
+    const desc = v ? v.rawDescription : p.description;
+    let text = `Hola eldukedecan, quiero adquirir este producto.
+Producto: ${m.name} - ${p.name} - ${desc}
 Cantidad: ${this.productQuantity()}`;
+
+    if (p.promotion) {
+      text += `\n*Promoción aplicada:* ${p.promotion}`;
+    }
+
     return `https://wa.me/51946959338?text=${encodeURIComponent(text)}`;
   }
 }

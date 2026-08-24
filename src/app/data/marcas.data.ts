@@ -1,3 +1,10 @@
+export interface ProductVariant {
+  weight: string;
+  price: string;
+  oldPrice?: string;
+  rawDescription: string;
+}
+
 export interface Product {
   name: string;
   description: string;
@@ -5,7 +12,10 @@ export interface Product {
   price: string;
   icon: string;
   animal: 'perro' | 'gato';
+  tags?: string[];
+  promotion?: string;
   image?: string;
+  variants?: ProductVariant[];
 }
 
 export interface Marca {
@@ -14,6 +24,13 @@ export interface Marca {
   description: string;
   logo: string;
   products: Product[];
+}
+
+export interface OtrasMascotasProduct {
+  name: string;
+  description: string;
+  image: string;
+  price: string;
 }
 
 export const MARCAS_DATA: Record<string, Marca> = {

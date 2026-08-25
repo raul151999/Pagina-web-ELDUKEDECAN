@@ -2,11 +2,12 @@ import { Component, HostListener, OnInit, OnDestroy, signal } from '@angular/cor
 import { RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { GlobalSearchComponent } from '../../components/global-search/global-search.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, GlobalSearchComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })

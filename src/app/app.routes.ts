@@ -12,6 +12,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/otras-mascotas/otras-mascotas.component').then(c => c.OtrasMascotasComponent)
   },
   {
+    path: 'accesorios',
+    loadComponent: () => import('./pages/accesorios/accesorios.component').then(c => c.AccesoriosComponent)
+  },
+  {
+    path: 'farmacia',
+    loadComponent: () => import('./pages/farmacia/farmacia.component').then(c => c.FarmaciaComponent)
+  },
+  {
     path: 'ofertas',
     loadComponent: () =>
       import('./pages/promos/promos.component').then((m) => m.PromosComponent),

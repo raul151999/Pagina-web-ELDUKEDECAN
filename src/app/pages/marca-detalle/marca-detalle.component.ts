@@ -62,9 +62,36 @@ export class MarcaDetalleComponent implements OnInit {
     });
   });
 
-  // Computed signal for visible products based on displayLimit
+  // Pagination
+  currentPage = signal(1);
+  itemsPerPage = 6;
+
+  // Computed signal for visible products based on pagination
   visibleProducts = computed(() => {
-    return this.allFilteredProducts().slice(0, this.displayLimit());
+    const start = (this.currentPage() - 1) * this.itemsPerPage;
+    return this.allFilteredProducts().slice(start, start + this.itemsPerPage);
+  });
+
+  totalPages = computed(() => {
+    return Math.ceil(this.allFilteredProducts().length / this.itemsPerPage);
+  });
+
+  pagesArray = computed(() => {
+    const total = this.totalPages();
+    const current = this.currentPage();
+    const pages = [];
+    
+    let startPage = Math.max(1, current - 4);
+    let endPage = Math.min(total, startPage + 9);
+    
+    if (endPage - startPage < 9) {
+      startPage = Math.max(1, endPage - 9);
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+    return pages;
   });
 
   // Computed signals to check if there are products for a specific category
@@ -118,14 +145,14 @@ export class MarcaDetalleComponent implements OnInit {
         this.marca.set(null); 
       }
       
-      this.displayLimit.set(6); // Reset limit on route change
+      this.currentPage.set(1); // Reset page on route change
       this.isLoading.set(false);
     });
   }
 
   setCategory(category: 'perro' | 'gato') {
     this.selectedCategory.set(category);
-    this.displayLimit.set(6); // Reset limit on category change
+    this.currentPage.set(1); // Reset page on category change
   }
 
   toggleFilter() {
@@ -137,11 +164,14 @@ export class MarcaDetalleComponent implements OnInit {
       ...current,
       [tag]: !current[tag]
     }));
-    this.displayLimit.set(6); // Reset limit on filter change
+    this.currentPage.set(1); // Reset page on filter change
   }
 
-  loadMore() {
-    this.displayLimit.update(current => current + 6);
+  goToPage(page: number) {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage.set(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   // --- Modal Logic ---

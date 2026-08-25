@@ -1,9 +1,32 @@
-<section class="otras-mascotas-page">
+<section class="accesorios-page">
   <div class="container">
     <div class="page-header">
-      <h1 class="page-title">Otras Mascotas</h1>
-      <p class="page-subtitle">Encuentra los mejores accesorios, comida y virutas para los más pequeños del hogar.</p>
+      <h1 class="page-title">Accesorios</h1>
+      <p class="page-subtitle">Encuentra los mejores collares, juguetes, y más para tus mascotas.</p>
     </div>
+
+    <!-- Filtros -->
+    <div class="filters-section">
+      <div class="animal-filters">
+        <button class="animal-btn" [class.active]="activeAnimal() === 'perro'" (click)="setAnimal('perro')">
+          <span class="animal-icon">🐶</span> Perros
+        </button>
+        <button class="animal-btn" [class.active]="activeAnimal() === 'gato'" (click)="setAnimal('gato')">
+          <span class="animal-icon">🐱</span> Gatos
+        </button>
+      </div>
+
+      @if (availableCategories().length > 1) {
+        <div class="category-filters">
+          @for (category of availableCategories(); track category) {
+            <button class="category-btn" [class.active]="activeCategory() === category" (click)="setCategory(category)">
+              {{ category }}
+            </button>
+          }
+        </div>
+      }
+    </div>
+
 
     @if (loading()) {
       <div class="loading-state">
@@ -15,18 +38,6 @@
         <p>Aún no hay productos disponibles en esta categoría.</p>
       </div>
     } @else {
-      <!-- Filtros -->
-      <div class="filters-container">
-        @for (tag of availableTags(); track tag) {
-          <button 
-            class="filter-chip" 
-            [class.active]="selectedFilter() === tag"
-            (click)="setFilter(tag)">
-            {{ tag }}
-          </button>
-        }
-      </div>
-
       <div class="products-grid">
         @for (product of pagedProducts(); track product.name) {
           <div class="product-card">

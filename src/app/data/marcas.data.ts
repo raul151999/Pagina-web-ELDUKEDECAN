@@ -31,6 +31,16 @@ export interface OtrasMascotasProduct {
   description: string;
   image: string;
   price: string;
+  tag?: string;
+}
+
+export interface AccesorioProduct {
+  name: string;
+  description: string;
+  image: string;
+  price: string;
+  animal: string; // 'perro' or 'gato'
+  category: string; // 'juguetes', 'camas', etc.
 }
 
 export const MARCAS_DATA: Record<string, Marca> = {

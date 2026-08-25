@@ -1,8 +1,8 @@
-<section class="otras-mascotas-page">
+<section class="farmacia-page">
   <div class="container">
     <div class="page-header">
-      <h1 class="page-title">Otras Mascotas</h1>
-      <p class="page-subtitle">Encuentra los mejores accesorios, comida y virutas para los más pequeños del hogar.</p>
+      <h1 class="page-title">Farmacia Veterinaria</h1>
+      <p class="page-subtitle">Medicinas, suplementos y vitaminas para el cuidado de tu mascota.</p>
     </div>
 
     @if (loading()) {
@@ -15,18 +15,6 @@
         <p>Aún no hay productos disponibles en esta categoría.</p>
       </div>
     } @else {
-      <!-- Filtros -->
-      <div class="filters-container">
-        @for (tag of availableTags(); track tag) {
-          <button 
-            class="filter-chip" 
-            [class.active]="selectedFilter() === tag"
-            (click)="setFilter(tag)">
-            {{ tag }}
-          </button>
-        }
-      </div>
-
       <div class="products-grid">
         @for (product of pagedProducts(); track product.name) {
           <div class="product-card">

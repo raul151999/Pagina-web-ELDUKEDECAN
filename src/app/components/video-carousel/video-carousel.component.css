@@ -60,14 +60,26 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-bottom: 20px;
-  /* Ocultar barra de scroll en navegadores webkit */
   -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
+/* Scrollbar moderno para el carrusel */
 .video-carousel::-webkit-scrollbar {
-  display: none;
+  height: 8px;
+}
+
+.video-carousel::-webkit-scrollbar-track {
+  background: var(--color-gray-100);
+  border-radius: 10px;
+}
+
+.video-carousel::-webkit-scrollbar-thumb {
+  background: var(--color-primary-light, #34d399); /* Usando un verde claro por defecto */
+  border-radius: 10px;
+}
+
+.video-carousel::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary, #10b981);
 }
 
 .video-card {

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { Marca, Product, OtrasMascotasProduct } from '../data/marcas.data';
+import { Marca, Product, OtrasMascotasProduct, AccesorioProduct } from '../data/marcas.data';
 
 @Injectable({
   providedIn: 'root'
@@ -35,10 +35,34 @@ export class GoogleSheetsService {
     }
   }
 
+  async getAccesorios(): Promise<AccesorioProduct[]> {
+    try {
+      // REEMPLAZAR 'GID_ACCESORIOS' por el GID de la hoja 3 (Accesorios)
+      const url = `${this.CSV_URL}&gid=139935454&t=${Date.now()}`;
+      const csvData = await firstValueFrom(this.http.get(url, { responseType: 'text' }));
+      return this.parseCsvToAccesorios(csvData);
+    } catch (error) {
+      console.error('Error cargando los datos de Accesorios:', error);
+      return [];
+    }
+  }
+
+  async getFarmacia(): Promise<OtrasMascotasProduct[]> {
+    try {
+      // REEMPLAZAR 'GID_FARMACIA' por el GID de la hoja 4 (Farmacia)
+      const url = `${this.CSV_URL}&gid=1089516330&t=${Date.now()}`;
+      const csvData = await firstValueFrom(this.http.get(url, { responseType: 'text' }));
+      return this.parseCsvToOtrasMascotas(csvData);
+    } catch (error) {
+      console.error('Error cargando los datos de Farmacia:', error);
+      return [];
+    }
+  }
+
   private parseCsvToMarcas(csv: string): Record<string, Marca> {
     const lines = csv.split('\n');
     const marcasData: Record<string, Marca> = {};
-    
+
     // Configuración base de cada marca (descripciones y logos)
     const baseConfig: Record<string, any> = {
       "Hill's PD": { id: 'hills-pd', desc: 'Nutrición clínica de vanguardia para tratar diversas condiciones de salud.', logo: 'assets/logos/hills-logo.png' },
@@ -57,7 +81,7 @@ export class GoogleSheetsService {
     for (let i = 1; i < lines.length; i++) {
       const line = lines[i].trim();
       if (!line) continue;
-      
+
       // Parsear CSV respetando comillas (para textos con comas)
       const rawColumns = [];
       let current = '';
@@ -73,7 +97,7 @@ export class GoogleSheetsService {
         }
       }
       rawColumns.push(current);
-      
+
       // Limpiar comillas iniciales/finales
       const columns = rawColumns.map(c => c.replace(/^"|"$/g, '').trim());
 
@@ -96,12 +120,12 @@ export class GoogleSheetsService {
       const urlImagen = columns.length >= 5 ? columns[4] : undefined;
       const descLarga = columns.length >= 6 ? columns[5] : undefined;
       const promocion = columns.length >= 7 && columns[6].trim() !== '' ? columns[6].trim() : undefined;
-      
+
       const marcaConfig = baseConfig[marcaNombre] || { id: marcaNombre.toLowerCase().replace(/ /g, '-'), desc: '', logo: '' };
       const marcaId = marcaConfig.id;
 
       if (!marcasData[marcaId]) {
-        marcasData[marcaId] = { ...marcaConfig, products: [] };
+        marcasData[marcaId] = { ...marcaConfig, name: marcaNombre, products: [] };
       }
 
       const animalType = especie.toLowerCase().includes('perro') ? 'perro' : 'gato';
@@ -109,7 +133,7 @@ export class GoogleSheetsService {
 
       const nameAndDesc = (nombreProd + ' ' + descProd).toLowerCase();
       const tags: string[] = [];
-      
+
       if (nameAndDesc.includes('puppy') || nameAndDesc.includes('cachorro') || nameAndDesc.includes('kitten') || nameAndDesc.includes('gatito') || nameAndDesc.includes('junior')) {
         tags.push('cachorro');
       }
@@ -129,7 +153,7 @@ export class GoogleSheetsService {
         const peso = columns[i]?.trim();
         const precio = columns[i + 1]?.trim();
         const precioAntiguo = columns[i + 2]?.trim();
-        
+
         if (peso && precio) {
           variants.push({
             weight: peso,
@@ -165,12 +189,12 @@ export class GoogleSheetsService {
   private parseCsvToOtrasMascotas(csv: string): OtrasMascotasProduct[] {
     const lines = csv.split('\n');
     const products: OtrasMascotasProduct[] = [];
-    
+
     // Saltar la cabecera (índice 0)
     for (let i = 1; i < lines.length; i++) {
       const line = lines[i].trim();
       if (!line) continue;
-      
+
       const rawColumns = [];
       let current = '';
       let inQuotes = false;
@@ -185,16 +209,15 @@ export class GoogleSheetsService {
         }
       }
       rawColumns.push(current);
-      
+
       const columns = rawColumns.map(c => c.replace(/^"|"$/g, '').trim());
 
-      // Estructura: Nombre | Descripción | Imagen | Precio
-      if (columns.length < 4) continue;
-
+      // Estructura: Nombre | Descripción | Imagen | Precio | Categoría (Opcional)
       const name = columns[0];
       const description = columns[1];
       const image = columns[2];
       const price = columns[3];
+      const tag = columns.length > 4 ? columns[4] : '';
       
       if (!name) continue;
 
@@ -202,7 +225,67 @@ export class GoogleSheetsService {
         name,
         description,
         image,
-        price
+        price: price || 'Consultar precio',
+        tag: tag || 'Otros'
+      });
+    }
+
+    return products;
+  }
+
+  private parseCsvToAccesorios(csv: string): AccesorioProduct[] {
+    const lines = csv.split('\n');
+    const products: AccesorioProduct[] = [];
+
+    // Saltar la cabecera (índice 0)
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (!line) continue;
+
+      const rawColumns = [];
+      let current = '';
+      let inQuotes = false;
+      for (let char of line) {
+        if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+          rawColumns.push(current);
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      rawColumns.push(current);
+
+      const columns = rawColumns.map(c => c.replace(/^"|"$/g, '').trim());
+
+      // Estructura: Nombre | Descripción | Imagen | Precio | Mascota | Categoría
+      const name = columns[0];
+      const description = columns[1] || '';
+      const image = columns[2] || '';
+      const price = columns[3] || 'Consultar precio';
+      
+      let animal = 'perro';
+      if (columns.length > 4 && columns[4]) {
+         const animalRaw = columns[4].toLowerCase();
+         if ((animalRaw.includes('perro') && animalRaw.includes('gato')) || animalRaw.includes('ambos')) {
+           animal = 'ambos';
+         } else if (animalRaw.includes('gato')) {
+           animal = 'gato';
+         }
+      }
+      
+      const category = columns.length > 5 && columns[5] ? columns[5] : 'Otros';
+
+      if (!name) continue;
+
+      products.push({
+        name,
+        description,
+        image,
+        price,
+        animal,
+        category
       });
     }
 

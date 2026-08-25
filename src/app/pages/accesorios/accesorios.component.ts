@@ -1,53 +1,53 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleSheetsService } from '../../services/google-sheets.service';
-import { OtrasMascotasProduct } from '../../data/marcas.data';
+import { AccesorioProduct } from '../../data/marcas.data';
 
 @Component({
-  selector: 'app-otras-mascotas',
+  selector: 'app-accesorios',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './otras-mascotas.component.html',
-  styleUrl: './otras-mascotas.component.css'
+  templateUrl: './accesorios.component.html',
+  styleUrl: './accesorios.component.css'
 })
-export class OtrasMascotasComponent implements OnInit {
+export class AccesoriosComponent implements OnInit {
   private sheetsService = inject(GoogleSheetsService);
   
-  products = signal<OtrasMascotasProduct[]>([]);
+  products = signal<AccesorioProduct[]>([]);
   loading = signal<boolean>(true);
 
   // Filtros
-  selectedFilter = signal<string>('Todos');
-  
-  // Paginación
+  activeAnimal = signal<'perro' | 'gato'>('perro');
+  activeCategory = signal<string>('Todas');
+
+  availableCategories = computed(() => {
+    const animal = this.activeAnimal();
+    const allProds = this.products().filter(p => p.animal === animal || p.animal === 'ambos');
+    const cats = new Set(allProds.map(p => p.category));
+    return ['Todas', ...Array.from(cats)];
+  });
+
+  filteredProducts = computed(() => {
+    const animal = this.activeAnimal();
+    const category = this.activeCategory();
+    let result = this.products().filter(p => p.animal === animal || p.animal === 'ambos');
+    if (category !== 'Todas') {
+      result = result.filter(p => p.category === category);
+    }
+    return result;
+  });
+
+  // Pagination
   currentPage = signal<number>(1);
   itemsPerPage = 6;
-  
-  availableTags = computed(() => {
-    const tags = new Set<string>();
-    this.products().forEach(p => {
-      if (p.tag && p.tag.toLowerCase() !== 'otros') {
-        tags.add(p.tag);
-      }
-    });
-    return ['Todos', ...Array.from(tags).sort()];
-  });
 
-  visibleProducts = computed(() => {
-    const filter = this.selectedFilter();
-    const all = this.products();
-    if (filter === 'Todos') return all;
-    return all.filter(p => p.tag === filter);
-  });
-
-  // Productos de la página actual
   pagedProducts = computed(() => {
     const start = (this.currentPage() - 1) * this.itemsPerPage;
-    return this.visibleProducts().slice(start, start + this.itemsPerPage);
+    return this.filteredProducts().slice(start, start + this.itemsPerPage);
   });
 
   totalPages = computed(() => {
-    return Math.ceil(this.visibleProducts().length / this.itemsPerPage);
+    return Math.ceil(this.filteredProducts().length / this.itemsPerPage);
   });
 
   pagesArray = computed(() => {
@@ -70,24 +70,9 @@ export class OtrasMascotasComponent implements OnInit {
 
   async ngOnInit() {
     this.loading.set(true);
-    const data = await this.sheetsService.getOtrasMascotas();
-    
-    // Normalizar tags (e.g. "aves " -> "Aves")
-    data.forEach(p => {
-      if (p.tag) {
-        // Capitalize first letter
-        const t = p.tag.trim();
-        p.tag = t.charAt(0).toUpperCase() + t.slice(1).toLowerCase();
-      }
-    });
-
+    const data = await this.sheetsService.getAccesorios();
     this.products.set(data);
     this.loading.set(false);
-  }
-
-  setFilter(tag: string) {
-    this.selectedFilter.set(tag);
-    this.currentPage.set(1); // Volver a la página 1 al filtrar
   }
 
   goToPage(page: number) {
@@ -97,11 +82,22 @@ export class OtrasMascotasComponent implements OnInit {
     }
   }
 
+  setAnimal(animal: 'perro' | 'gato') {
+    this.activeAnimal.set(animal);
+    this.activeCategory.set('Todas');
+    this.currentPage.set(1);
+  }
+
+  setCategory(category: string) {
+    this.activeCategory.set(category);
+    this.currentPage.set(1);
+  }
+
   // --- Modal Logic ---
-  selectedProductForModal = signal<OtrasMascotasProduct | null>(null);
+  selectedProductForModal = signal<AccesorioProduct | null>(null);
   productQuantity = signal<number>(1);
 
-  openModal(product: OtrasMascotasProduct) {
+  openModal(product: AccesorioProduct) {
     this.selectedProductForModal.set(product);
     this.productQuantity.set(1);
     document.body.style.overflow = 'hidden';

@@ -9,11 +9,7 @@ interface Slide {
   alt: string;
 }
 
-interface SearchItem {
-  title: string;
-  category: string;
-  route: string;
-}
+
 
 @Component({
   selector: 'app-hero',
@@ -23,37 +19,7 @@ interface SearchItem {
   styleUrl: './hero.component.css',
 })
 export class HeroComponent implements OnInit, OnDestroy {
-  // Search state
-  searchQuery = signal('');
-  showSuggestions = signal(false);
 
-  // Searchable database
-  searchDatabase: SearchItem[] = [
-    { title: 'Consulta veterinaria', category: 'Servicios', route: '/servicios' },
-    { title: 'Vacunación', category: 'Servicios', route: '/servicios' },
-    { title: 'Cirugía', category: 'Servicios', route: '/servicios' },
-    { title: 'Grooming', category: 'Servicios', route: '/servicios' },
-    { title: 'Desparasitación', category: 'Servicios', route: '/servicios' },
-    { title: 'Laboratorio clínico', category: 'Servicios', route: '/servicios' },
-    { title: 'Rayos X / Ecografía', category: 'Servicios', route: '/servicios' },
-    { title: 'Descuentos del mes', category: 'Ofertas', route: '/ofertas' },
-    { title: 'Combos Preventivos', category: 'Ofertas', route: '/ofertas' },
-    { title: 'Packs de Grooming', category: 'Ofertas', route: '/ofertas' },
-    { title: "Hill's", category: 'Marcas', route: '/' },
-    { title: 'Pro Plan', category: 'Marcas', route: '/' },
-    { title: 'Royal Canin', category: 'Marcas', route: '/' },
-    { title: 'Bravecto', category: 'Marcas', route: '/' }
-  ];
-
-  // Computed filtered results
-  filteredSuggestions = computed(() => {
-    const query = this.searchQuery().toLowerCase().trim();
-    if (!query) return this.searchDatabase.slice(0, 5); // Show first 5 as defaults
-    return this.searchDatabase.filter(item => 
-      item.title.toLowerCase().includes(query) || 
-      item.category.toLowerCase().includes(query)
-    );
-  });
 
   currentSlide = signal(0);
   viewers = signal(0);
@@ -71,32 +37,7 @@ export class HeroComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router) {}
 
-  // Search Methods
-  onSearchInput() {
-    this.showSuggestions.set(true);
-  }
 
-  hideSuggestions() {
-    setTimeout(() => this.showSuggestions.set(false), 200);
-  }
-
-  selectSuggestion(item: SearchItem) {
-    this.searchQuery.set(item.title);
-    this.showSuggestions.set(false);
-    this.router.navigate([item.route]);
-  }
-
-  performSearch() {
-    const query = this.searchQuery().toLowerCase().trim();
-    if (!query) return;
-
-    const match = this.searchDatabase.find(item => item.title.toLowerCase().includes(query));
-    if (match) {
-      this.router.navigate([match.route]);
-    } else {
-      this.router.navigate(['/servicios']);
-    }
-  }
 
   ngOnInit(): void {
     // Auto-advance carousel every 5 seconds

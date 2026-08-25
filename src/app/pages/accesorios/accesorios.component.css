@@ -1,4 +1,4 @@
-.otras-mascotas-page {
+.accesorios-page {
   padding: var(--space-12) 0 var(--space-20);
   background: var(--color-gray-50);
   min-height: 80vh;
@@ -20,6 +20,80 @@
   color: var(--color-gray-600);
   max-width: 600px;
   margin: 0 auto;
+}
+
+/* Filtros */
+.filters-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-10);
+}
+
+.animal-filters {
+  display: flex;
+  gap: var(--space-4);
+  background: white;
+  padding: 8px;
+  border-radius: 40px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.animal-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border: none;
+  background: transparent;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-gray-500);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.animal-btn.active {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(2, 199, 176, 0.3);
+}
+
+.animal-icon {
+  font-size: 1.2rem;
+}
+
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 800px;
+}
+
+.category-btn {
+  padding: 8px 20px;
+  border: 1px solid var(--color-gray-200);
+  background: white;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  color: var(--color-gray-600);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.category-btn.active {
+  background: var(--color-gray-900);
+  border-color: var(--color-gray-900);
+  color: white;
 }
 
 /* Loading & Empty States */
@@ -45,41 +119,6 @@
 
 @keyframes spin {
   to { transform: rotate(360deg); }
-}
-
-/* Filters */
-.filters-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-bottom: var(--space-8);
-  justify-content: center;
-}
-
-.filter-chip {
-  padding: var(--space-2) var(--space-5);
-  border-radius: var(--radius-full);
-  background: var(--color-white);
-  border: 1px solid var(--color-gray-200);
-  color: var(--color-gray-600);
-  font-weight: 600;
-  font-size: var(--text-sm);
-  cursor: pointer;
-  transition: all var(--transition-base);
-  box-shadow: var(--shadow-xs);
-}
-
-.filter-chip:hover {
-  background: var(--color-gray-50);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
-}
-
-.filter-chip.active {
-  background: var(--color-primary);
-  color: var(--color-white);
-  border-color: var(--color-primary);
-  box-shadow: 0 4px 10px rgba(2, 199, 176, 0.3);
 }
 
 /* Grid & Cards */
@@ -181,7 +220,7 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .otras-mascotas-page {
+  .accesorios-page {
     padding: var(--space-8) 0 var(--space-12);
   }
   .page-title {

@@ -118,14 +118,15 @@
 
             <div class="product-card__footer">
               <span class="product-card__price">
-                {{ product.variants && product.variants.length > 0 ? 'Desde ' + product.variants[0].price : product.price }}
+                {{ product.variants && product.variants.length > 0 ? 'Desde ' + product.variants[0].price :
+                product.price }}
               </span>
               <button (click)="openModal(product)" class="btn btn--primary btn--sm product-card__btn">Comprar</button>
             </div>
             @if (product.promotion) {
-              <div class="product-card__promo">
-                <span class="promo-icon">🎁</span> {{ product.promotion }}
-              </div>
+            <div class="product-card__promo">
+              <span class="promo-icon">🎁</span> {{ product.promotion }}
+            </div>
             }
           </div>
         </div>
@@ -138,13 +139,29 @@
         }
       </div>
 
-      @if (allFilteredProducts().length > visibleProducts().length) {
-        <div class="load-more-container">
-          <button class="btn btn--secondary btn-load-more" (click)="loadMore()">
-            Ver más resultados
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
+      <!-- Paginación estilo Google -->
+      @if (totalPages() > 1) {
+        <div class="google-pagination">
+          <button class="page-btn text-btn" 
+                  [disabled]="currentPage() === 1" 
+                  (click)="goToPage(currentPage() - 1)">
+            Anterior
+          </button>
+          
+          <div class="page-numbers">
+            @for (p of pagesArray(); track p) {
+              <button class="page-btn num-btn" 
+                      [class.active]="currentPage() === p"
+                      (click)="goToPage(p)">
+                {{ p }}
+              </button>
+            }
+          </div>
+
+          <button class="page-btn text-btn" 
+                  [disabled]="currentPage() === totalPages()" 
+                  (click)="goToPage(currentPage() + 1)">
+            Siguiente
           </button>
         </div>
       }
@@ -163,7 +180,7 @@
       <div class="glass-card info-card">
         <h3>Delivery Gratis</h3>
         <p>
-          Por compras superiores a S/ 100.00 te lo llevamos gratis a cualquier
+          Por compras superiores a S/ 450.00 te lo llevamos gratis a cualquier
           parte de Trujillo.
         </p>
       </div>
@@ -227,45 +244,53 @@
 
           <div class="modal-price-row">
             @if (selectedVariant()?.oldPrice) {
-              <span class="modal-old-price">{{ selectedVariant()?.oldPrice }}</span>
+            <span class="modal-old-price">{{ selectedVariant()?.oldPrice }}</span>
             }
             <span class="modal-price">{{ selectedVariant()?.price || p.price }}</span>
           </div>
 
           @if (p.variants && p.variants.length > 0) {
-            <div class="modal-variants">
-              <span class="variants-label">Seleccionar Peso</span>
-              <div class="variants-list">
-                @for (variant of p.variants; track variant.weight) {
-                  <label class="variant-radio" [class.selected]="selectedVariant() === variant">
-                    <input type="radio" name="weight" [value]="variant" [checked]="selectedVariant() === variant" (change)="selectVariant(variant)">
-                    <span class="radio-circle"></span>
-                    <span class="variant-weight">{{ variant.weight }}</span>
-                    <span class="variant-price-info">
-                      @if (pricePerKg() && selectedVariant() === variant) {
-                        <span class="variant-pkg">{{ pricePerKg() }}</span>
-                      }
-                      @if (variant.oldPrice) {
-                        <span class="variant-old-price">{{ variant.oldPrice }}</span>
-                      }
-                      <span class="variant-price">{{ variant.price }}</span>
-                    </span>
-                  </label>
-                }
-              </div>
+          <div class="modal-variants">
+            <span class="variants-label">Seleccionar Peso</span>
+            <div class="variants-list">
+              @for (variant of p.variants; track variant.weight) {
+              <label class="variant-radio" [class.selected]="selectedVariant() === variant">
+                <input type="radio" name="weight" [value]="variant" [checked]="selectedVariant() === variant"
+                  (change)="selectVariant(variant)">
+                <span class="radio-circle"></span>
+                <span class="variant-weight">{{ variant.weight }}</span>
+                <span class="variant-price-info">
+                  @if (pricePerKg() && selectedVariant() === variant) {
+                  <span class="variant-pkg">{{ pricePerKg() }}</span>
+                  }
+                  @if (variant.oldPrice) {
+                  <span class="variant-old-price">{{ variant.oldPrice }}</span>
+                  }
+                  <span class="variant-price">{{ variant.price }}</span>
+                </span>
+              </label>
+              }
             </div>
+          </div>
           }
 
           @if (p.promotion) {
-            <div class="modal-promo-banner">
-              <div class="promo-icon-wrapper">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
-              </div>
-              <div class="promo-content">
-                <strong>¡Promoción Especial!</strong>
-                <p>{{ p.promotion }}</p>
-              </div>
+          <div class="modal-promo-banner">
+            <div class="promo-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                <rect x="2" y="7" width="20" height="5"></rect>
+                <line x1="12" y1="22" x2="12" y2="7"></line>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+              </svg>
             </div>
+            <div class="promo-content">
+              <strong>¡Promoción Especial!</strong>
+              <p>{{ p.promotion }}</p>
+            </div>
+          </div>
           }
 
           <div class="modal-quantity-row">

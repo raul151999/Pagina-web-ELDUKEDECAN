@@ -21,8 +21,10 @@ export class VideoCarouselComponent implements OnInit {
   // excepto el último.
   rawLinks = [
     'https://www.tiktok.com/@eldukedecan_veterinaria/video/7676918688775294228?is_from_webapp=1&sender_device=pc&web_id=7662421185204274695',
-    'https://www.tiktok.com/@superpet.pe/video/7279326941192539397',
-    'https://www.instagram.com/reel/C5_8w_ZOS9Z/'
+    'https://www.youtube.com/shorts/vV3WOiE4-Dg?si=ap3yHNitnXaazx07',
+    'https://www.instagram.com/reel/DcPBeNxBBmP/?igsi=MTJwNzY3eDhhZDh5',
+    'https://www.youtube.com/shorts/Xb8C7p7FmJk?si=jaAd0-N8viNumbHR',
+    'https://www.facebook.com/reel/1380977866869855'
   ];
   // =========================================================================
 
@@ -50,6 +52,18 @@ export class VideoCarouselComponent implements OnInit {
           const embedUrl = `https://www.instagram.com/p/${match[2]}/embed`;
           return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
         }
+      } else if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        // Buscar el ID del video o short en YouTube
+        const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/)|youtu\.be\/)([^"&?\/\s]{11})/);
+        if (match && match[1]) {
+          const embedUrl = `https://www.youtube.com/embed/${match[1]}`;
+          return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+        }
+      } else if (url.includes('facebook.com') || url.includes('fb.watch')) {
+        // Facebook permite embeber videos de forma nativa pasando la URL codificada
+        const encodedUrl = encodeURIComponent(url);
+        const embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodedUrl}&show_text=false&width=330`;
+        return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
       }
     } catch (e) {
       console.error('Error procesando el enlace del video:', url, e);

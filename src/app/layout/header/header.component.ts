@@ -14,6 +14,7 @@ import { GlobalSearchComponent } from '../../components/global-search/global-sea
 export class HeaderComponent implements OnInit, OnDestroy {
   menuOpen = signal(false);
   scrolled = signal(false);
+  expandedMenu = signal<string | null>(null);
 
   private routerSub!: Subscription;
 
@@ -43,11 +44,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+      this.expandedMenu.set(null);
     }
   }
 
   closeMenu(): void {
     this.menuOpen.set(false);
+    this.expandedMenu.set(null);
     document.body.style.overflow = '';
+  }
+
+  toggleSubmenu(menuName: string, event: Event): void {
+    event.preventDefault();
+    this.expandedMenu.update(current => current === menuName ? null : menuName);
   }
 }

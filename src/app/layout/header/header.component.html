@@ -180,14 +180,87 @@
   <div class="header__mobile" [class.header__mobile--open]="menuOpen()">
     <!-- En mobile el buscador también puede ir aquí adentro si es necesario, por ahora lo dejamos arriba -->
     <nav class="header__mobile-nav">
-      <a routerLink="/ofertas" routerLinkActive="active" class="header__mobile-link" (click)="closeMenu()">Ofertas</a>
-      <a routerLink="/marcas" routerLinkActive="active" class="header__mobile-link" (click)="closeMenu()">Marcas</a>
-      <a routerLink="/servicios" routerLinkActive="active" class="header__mobile-link" (click)="closeMenu()">Servicios</a>
+      
+      <!-- Ofertas Accordion -->
+      <div class="mobile-accordion">
+        <button class="header__mobile-link" (click)="toggleSubmenu('ofertas', $event)">
+          Ofertas
+          <svg class="mobile-chevron" [class.rotated]="expandedMenu() === 'ofertas'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="mobile-subnav" [class.open]="expandedMenu() === 'ofertas'">
+          <a routerLink="/ofertas" class="mobile-sublink" (click)="closeMenu()">Ver todas las ofertas</a>
+          <a routerLink="/ofertas/descuentos" class="mobile-sublink" (click)="closeMenu()">Descuentos del mes</a>
+          <a routerLink="/ofertas/combos" class="mobile-sublink" (click)="closeMenu()">Combos Preventivos</a>
+          <a routerLink="/ofertas/packs" class="mobile-sublink" (click)="closeMenu()">Packs de Grooming</a>
+        </div>
+      </div>
+
+      <!-- Marcas Accordion -->
+      <div class="mobile-accordion">
+        <button class="header__mobile-link" (click)="toggleSubmenu('marcas', $event)">
+          Marcas
+          <svg class="mobile-chevron" [class.rotated]="expandedMenu() === 'marcas'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="mobile-subnav" [class.open]="expandedMenu() === 'marcas'">
+          <a routerLink="/marcas" class="mobile-sublink" (click)="closeMenu()">Ver todas las marcas</a>
+          <a routerLink="/marcas/hills-pd" class="mobile-sublink" (click)="closeMenu()">Hill's PD</a>
+          <a routerLink="/marcas/hills-sd" class="mobile-sublink" (click)="closeMenu()">Hill's SD</a>
+          <a routerLink="/marcas/nutram" class="mobile-sublink" (click)="closeMenu()">Nutram</a>
+          <a routerLink="/marcas/proplan" class="mobile-sublink" (click)="closeMenu()">Proplan</a>
+          <a routerLink="/marcas/brit-care" class="mobile-sublink" (click)="closeMenu()">Brit care</a>
+          <a routerLink="/marcas/monge" class="mobile-sublink" (click)="closeMenu()">Monge</a>
+          <a routerLink="/marcas/brit-premium" class="mobile-sublink" (click)="closeMenu()">Brit Premium</a>
+          <a routerLink="/marcas/canbo" class="mobile-sublink" (click)="closeMenu()">Canbo</a>
+          <a routerLink="/marcas/ricocan" class="mobile-sublink" (click)="closeMenu()">Ricocan</a>
+        </div>
+      </div>
+
+      <!-- Servicios Accordion -->
+      <div class="mobile-accordion">
+        <button class="header__mobile-link" (click)="toggleSubmenu('servicios', $event)">
+          Servicios
+          <svg class="mobile-chevron" [class.rotated]="expandedMenu() === 'servicios'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="mobile-subnav" [class.open]="expandedMenu() === 'servicios'">
+          <a routerLink="/servicios" class="mobile-sublink" (click)="closeMenu()">Ver todos los servicios</a>
+          <a routerLink="/servicios/consulta-veterinaria" class="mobile-sublink" (click)="closeMenu()">Consulta veterinaria</a>
+          <a routerLink="/servicios/vacunacion" class="mobile-sublink" (click)="closeMenu()">Vacunación</a>
+          <a routerLink="/servicios/cirugia" class="mobile-sublink" (click)="closeMenu()">Cirugía</a>
+          <a routerLink="/servicios/grooming" class="mobile-sublink" (click)="closeMenu()">Grooming</a>
+          <a routerLink="/servicios/desparasitacion" class="mobile-sublink" (click)="closeMenu()">Desparasitación</a>
+          <a routerLink="/servicios/laboratorio-clinico" class="mobile-sublink" (click)="closeMenu()">Laboratorio clínico</a>
+          <a routerLink="/servicios/rayosx-ecografia" class="mobile-sublink" (click)="closeMenu()">Rayos X / Ecografía</a>
+        </div>
+      </div>
+
       <a routerLink="/otras-mascotas" routerLinkActive="active" class="header__mobile-link" (click)="closeMenu()">Otras Mascotas</a>
       <a routerLink="/accesorios" routerLinkActive="active" class="header__mobile-link" (click)="closeMenu()">Accesorios</a>
       <a routerLink="/farmacia" routerLinkActive="active" class="header__mobile-link" (click)="closeMenu()">Farmacia</a>
-      <a routerLink="/agenda-una-cita" routerLinkActive="active" class="header__mobile-link" (click)="closeMenu()">Agenda una cita</a>
-      <a routerLink="/contactanos" routerLinkActive="active" class="header__mobile-link" (click)="closeMenu()">Contáctanos</a>
+      
+      <!-- Más Accordion -->
+      <div class="mobile-accordion">
+        <button class="header__mobile-link" (click)="toggleSubmenu('mas', $event)">
+          Más
+          <svg class="mobile-chevron" [class.rotated]="expandedMenu() === 'mas'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="mobile-subnav" [class.open]="expandedMenu() === 'mas'">
+          <a routerLink="/nuestra-historia" class="mobile-sublink" (click)="closeMenu()">Nuestra historia</a>
+          <a routerLink="/nuestro-proposito" class="mobile-sublink" (click)="closeMenu()">Nuestro propósito</a>
+          <a routerLink="/groomers" class="mobile-sublink" (click)="closeMenu()">Equipo: Groomers</a>
+          <a routerLink="/veterinarios" class="mobile-sublink" (click)="closeMenu()">Equipo: Veterinarios</a>
+          <a routerLink="/agenda-una-cita" class="mobile-sublink" (click)="closeMenu()">Agenda una cita</a>
+          <a routerLink="/contactanos" class="mobile-sublink" (click)="closeMenu()">Contáctanos</a>
+          <a routerLink="/reclamos-y-quejas" class="mobile-sublink" (click)="closeMenu()">Reclamos y quejas</a>
+        </div>
+      </div>
     </nav>
 
     <a href="https://wa.me/51946959338" target="_blank" rel="noopener noreferrer"

@@ -382,18 +382,23 @@
    RESPONSIVE
    ========================================================== */
 
-/* Mobile & Tablet: show hamburger, hide desktop nav & CTA */
 @media (max-width: 1024px) {
-  .header__nav {
-    display: none;
-  }
-
+  .header__nav,
   .header__cta {
     display: none;
   }
 
+  .header__top-row {
+    flex-wrap: wrap;
+  }
+
+  .header__logo {
+    order: 1;
+  }
+
   .header__hamburger {
     display: flex;
+    order: 2;
   }
 
   .header__logo-img {
@@ -401,8 +406,12 @@
     transform: scale(2.5) translateX(-5px);
   }
 
-  .header__logo-text {
-    font-size: var(--text-lg);
+  .header__search-container {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+    margin-top: var(--space-4);
   }
 
   .header--scrolled .header__mobile {

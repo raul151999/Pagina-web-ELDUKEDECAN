@@ -115,6 +115,18 @@
   --header-height: 140px;
 }
 
+@media (max-width: 1024px) {
+  :root {
+    --header-height: 190px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-height: 170px;
+  }
+}
+
 /* --- CSS Reset --- */
 *,
 *::before,

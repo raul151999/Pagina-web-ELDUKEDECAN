@@ -60,47 +60,47 @@
           </svg>
         </a>
         <div class="header__dropdown-menu header__dropdown-menu--marcas">
+          <a routerLink="/marcas/origen" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/origen-logo.png" alt="Origen" class="dropdown-item-logo"> Origen
+          </a>
+          <a routerLink="/marcas/nutram" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/nutram-logo.png" alt="Nutram" class="dropdown-item-logo"> Nutram
+          </a>
           <a routerLink="/marcas/hills-pd" class="header__dropdown-item header__dropdown-item--image">
             <img src="assets/logos/hills-logo.png" alt="Hill's PD" class="dropdown-item-logo"> Hill's PD
           </a>
           <a routerLink="/marcas/hills-sd" class="header__dropdown-item header__dropdown-item--image">
             <img src="assets/logos/hills-logo.png" alt="Hill's SD" class="dropdown-item-logo"> Hill's SD
           </a>
-          <a routerLink="/marcas/nutram" class="header__dropdown-item header__dropdown-item--image">
-            <img src="assets/logos/nutram-logo.png" alt="Nutram" class="dropdown-item-logo"> Nutram
-          </a>
-          <a routerLink="/marcas/proplan" class="header__dropdown-item header__dropdown-item--image">
-            <img src="assets/logos/pro-plan-logo.png" alt="Proplan" class="dropdown-item-logo"> Proplan
+          <a routerLink="/marcas/brit-vet-diets" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/brit-vet-diets-logo.png" alt="Brit Vet Diets" class="dropdown-item-logo"> Brit Vet Diets
           </a>
           <a routerLink="/marcas/brit-care" class="header__dropdown-item header__dropdown-item--image">
             <img src="assets/logos/brit-care-logo.png" alt="Brit care" class="dropdown-item-logo"> Brit care
           </a>
+          <a routerLink="/marcas/brit-premium" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/brit-premium-logo.png" alt="Brit Premium" class="dropdown-item-logo"> Brit Premium
+          </a>
+          <a routerLink="/marcas/dr-clauders" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/dr-clauders-logo.png" alt="Dr. Clauder's" class="dropdown-item-logo"> Dr. Clauder's
+          </a>
+          <a routerLink="/marcas/vet-solution" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/vet-solution-logo.png" alt="Vet Solution" class="dropdown-item-logo"> Vet Solution
+          </a>
           <a routerLink="/marcas/monge" class="header__dropdown-item header__dropdown-item--image">
             <img src="assets/logos/monge-logo.png" alt="Monge" class="dropdown-item-logo"> Monge
           </a>
-          <a routerLink="/marcas/brit-premium" class="header__dropdown-item header__dropdown-item--image">
-            <img src="assets/logos/brit-premium-logo.png" alt="Brit Premium" class="dropdown-item-logo"> Brit Premium
+          <a routerLink="/marcas/proplan" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/pro-plan-logo.png" alt="Proplan" class="dropdown-item-logo"> Proplan
+          </a>
+          <a routerLink="/marcas/equilibrio" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/equilibrio-logo.png" alt="Equilibrio" class="dropdown-item-logo"> Equilibrio
           </a>
           <a routerLink="/marcas/canbo" class="header__dropdown-item header__dropdown-item--image">
             <img src="assets/logos/canbo-logo.png" alt="Canbo" class="dropdown-item-logo"> Canbo
           </a>
           <a routerLink="/marcas/ricocan" class="header__dropdown-item header__dropdown-item--image">
             <img src="assets/logos/ricocan-logo.png" alt="Ricocan" class="dropdown-item-logo"> Ricocan
-          </a>
-          <a routerLink="/marcas/origen" class="header__dropdown-item header__dropdown-item--image">
-            <img src="assets/logos/origen-logo.png" alt="Origen" class="dropdown-item-logo"> Origen
-          </a>
-          <a routerLink="/marcas/dr-clauders" class="header__dropdown-item header__dropdown-item--image">
-            <img src="assets/logos/dr-clauders-logo.png" alt="Dr. Clauder's" class="dropdown-item-logo"> Dr. Clauder's
-          </a>
-          <a routerLink="/marcas/brit-vet-diets" class="header__dropdown-item header__dropdown-item--image">
-            <img src="assets/logos/brit-vet-diets-logo.png" alt="Brit Vet Diets" class="dropdown-item-logo"> Brit Vet Diets
-          </a>
-          <a routerLink="/marcas/equilibrio" class="header__dropdown-item header__dropdown-item--image">
-            <img src="assets/logos/equilibrio-logo.png" alt="Equilibrio" class="dropdown-item-logo"> Equilibrio
-          </a>
-          <a routerLink="/marcas/vet-solution" class="header__dropdown-item header__dropdown-item--image">
-            <img src="assets/logos/vet-solution-logo.png" alt="Vet Solution" class="dropdown-item-logo"> Vet Solution
           </a>
         </div>
       </div>
@@ -221,20 +221,20 @@
           </svg>
         </button>
         <div class="mobile-subnav mobile-subnav--grid" [class.open]="expandedMenu() === 'marcas'">
+          <a routerLink="/marcas/origen" class="mobile-sublink" (click)="closeMenu()">Origen</a>
+          <a routerLink="/marcas/nutram" class="mobile-sublink" (click)="closeMenu()">Nutram</a>
           <a routerLink="/marcas/hills-pd" class="mobile-sublink" (click)="closeMenu()">Hill's PD</a>
           <a routerLink="/marcas/hills-sd" class="mobile-sublink" (click)="closeMenu()">Hill's SD</a>
-          <a routerLink="/marcas/nutram" class="mobile-sublink" (click)="closeMenu()">Nutram</a>
-          <a routerLink="/marcas/proplan" class="mobile-sublink" (click)="closeMenu()">Proplan</a>
+          <a routerLink="/marcas/brit-vet-diets" class="mobile-sublink" (click)="closeMenu()">Brit Vet Diets</a>
           <a routerLink="/marcas/brit-care" class="mobile-sublink" (click)="closeMenu()">Brit care</a>
-          <a routerLink="/marcas/monge" class="mobile-sublink" (click)="closeMenu()">Monge</a>
           <a routerLink="/marcas/brit-premium" class="mobile-sublink" (click)="closeMenu()">Brit Premium</a>
+          <a routerLink="/marcas/dr-clauders" class="mobile-sublink" (click)="closeMenu()">Dr. Clauder's</a>
+          <a routerLink="/marcas/vet-solution" class="mobile-sublink" (click)="closeMenu()">Vet Solution</a>
+          <a routerLink="/marcas/monge" class="mobile-sublink" (click)="closeMenu()">Monge</a>
+          <a routerLink="/marcas/proplan" class="mobile-sublink" (click)="closeMenu()">Proplan</a>
+          <a routerLink="/marcas/equilibrio" class="mobile-sublink" (click)="closeMenu()">Equilibrio</a>
           <a routerLink="/marcas/canbo" class="mobile-sublink" (click)="closeMenu()">Canbo</a>
           <a routerLink="/marcas/ricocan" class="mobile-sublink" (click)="closeMenu()">Ricocan</a>
-          <a routerLink="/marcas/origen" class="mobile-sublink" (click)="closeMenu()">Origen</a>
-          <a routerLink="/marcas/dr-clauders" class="mobile-sublink" (click)="closeMenu()">Dr. Clauder's</a>
-          <a routerLink="/marcas/brit-vet-diets" class="mobile-sublink" (click)="closeMenu()">Brit Vet Diets</a>
-          <a routerLink="/marcas/equilibrio" class="mobile-sublink" (click)="closeMenu()">Equilibrio</a>
-          <a routerLink="/marcas/vet-solution" class="mobile-sublink" (click)="closeMenu()">Vet Solution</a>
         </div>
       </div>
 

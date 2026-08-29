@@ -174,6 +174,14 @@
   z-index: 100;
 }
 
+.header__dropdown-menu--marcas {
+  display: grid;
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
+  gap: 4px 16px;
+  min-width: max-content;
+}
+
 .header__dropdown:hover .header__dropdown-menu {
   opacity: 1;
   visibility: visible;
@@ -385,6 +393,17 @@
   opacity: 1;
   margin-top: var(--space-2);
   margin-bottom: var(--space-2);
+}
+
+.mobile-subnav--grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px 12px;
+}
+
+.mobile-subnav--grid .mobile-sublink {
+  padding: 10px 12px;
+  font-size: 0.95rem;
 }
 
 .mobile-sublink {

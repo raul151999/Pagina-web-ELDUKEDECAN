@@ -1,6 +1,7 @@
 import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { GoogleSheetsService } from '../../services/google-sheets.service';
 import { Product, ProductVariant, Marca, OtrasMascotasProduct } from '../../data/marcas.data';
 
@@ -26,6 +27,7 @@ export interface SearchableProduct {
 })
 export class GlobalSearchComponent implements OnInit {
   private sheetsService = inject(GoogleSheetsService);
+  private router = inject(Router);
 
   searchQuery = signal('');
   showSuggestions = signal(false);
@@ -145,6 +147,47 @@ export class GlobalSearchComponent implements OnInit {
 
   hideSuggestions() {
     setTimeout(() => this.showSuggestions.set(false), 200);
+  }
+
+  onEnterPressed() {
+    const query = this.searchQuery().toLowerCase().trim();
+    if (!query) return;
+
+    const normalizedQuery = query.replace(/'/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    // Extraer todas las marcas únicas
+    const allBrands = new Map<string, string>();
+    this.allProducts().forEach(p => {
+      if (p.type === 'marca' && p.brandData) {
+         const bName = p.brandData.name.toLowerCase().replace(/'/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+         allBrands.set(bName, p.brandData.id);
+      }
+    });
+
+    // 1. Coincidencia exacta con marca
+    if (allBrands.has(normalizedQuery)) {
+       const brandId = allBrands.get(normalizedQuery);
+       this.router.navigate(['/marcas', brandId]);
+       this.searchQuery.set('');
+       this.showSuggestions.set(false);
+       return;
+    }
+
+    // 2. Coincidencia parcial con marca
+    for (const [bName, bId] of allBrands.entries()) {
+      if (bName.includes(normalizedQuery) || normalizedQuery.includes(bName)) {
+         this.router.navigate(['/marcas', bId]);
+         this.searchQuery.set('');
+         this.showSuggestions.set(false);
+         return;
+      }
+    }
+
+    // 3. Si no es marca, seleccionar el primer producto de las sugerencias
+    const suggestions = this.filteredSuggestions();
+    if (suggestions.length > 0) {
+      this.selectSuggestion(suggestions[0]);
+    }
   }
 
   selectSuggestion(item: SearchableProduct) {

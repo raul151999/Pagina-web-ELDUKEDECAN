@@ -74,7 +74,12 @@ export class GoogleSheetsService {
       "Monge": { id: 'monge', desc: 'La máxima calidad de la nutrición italiana.', logo: 'assets/logos/monge-logo.png' },
       "Canbo": { id: 'canbo', desc: 'Nutrición súper premium diseñada para exigencias especiales.', logo: 'assets/logos/canbo-logo.png', banner: 'assets/banners/canbo-banner.png' },
       "Ricocan": { id: 'ricocan', desc: 'Alimento completo y balanceado.', logo: 'assets/logos/ricocan-logo.png', banner: 'assets/banners/ricocan-banner.png' },
-      "Ricocat": { id: 'ricocan', desc: 'Alimento completo y balanceado.', logo: 'assets/logos/ricocan-logo.png' }
+      "Ricocat": { id: 'ricocan', desc: 'Alimento completo y balanceado.', logo: 'assets/logos/ricocan-logo.png' },
+      "Origen": { id: 'origen', desc: 'Alimentación biológicamente apropiada.', logo: 'assets/logos/origen-logo.png' },
+      "Dr. Clauder's": { id: 'dr-clauders', desc: 'Nutrición super premium alemana.', logo: 'assets/logos/dr-clauders-logo.png' },
+      "Brit Vet Diets": { id: 'brit-vet-diets', desc: 'Nutrición clínica avanzada.', logo: 'assets/logos/brit-vet-diets-logo.png' },
+      "Equilibrio": { id: 'equilibrio', desc: 'Nutrición super premium de alto rendimiento.', logo: 'assets/logos/equilibrio-logo.png' },
+      "Vet Solution": { id: 'vet-solution', desc: 'Dietas veterinarias especializadas.', logo: 'assets/logos/vet-solution-logo.png' }
     };
 
     // Saltar la cabecera (índice 0)
@@ -218,7 +223,7 @@ export class GoogleSheetsService {
       const image = columns[2];
       const price = columns[3];
       const tag = columns.length > 4 ? columns[4] : '';
-      
+
       if (!name) continue;
 
       products.push({
@@ -264,17 +269,17 @@ export class GoogleSheetsService {
       const description = columns[1] || '';
       const image = columns[2] || '';
       const price = columns[3] || 'Consultar precio';
-      
+
       let animal = 'perro';
       if (columns.length > 4 && columns[4]) {
-         const animalRaw = columns[4].toLowerCase();
-         if ((animalRaw.includes('perro') && animalRaw.includes('gato')) || animalRaw.includes('ambos')) {
-           animal = 'ambos';
-         } else if (animalRaw.includes('gato')) {
-           animal = 'gato';
-         }
+        const animalRaw = columns[4].toLowerCase();
+        if ((animalRaw.includes('perro') && animalRaw.includes('gato')) || animalRaw.includes('ambos')) {
+          animal = 'ambos';
+        } else if (animalRaw.includes('gato')) {
+          animal = 'gato';
+        }
       }
-      
+
       const category = columns.length > 5 && columns[5] ? columns[5] : 'Otros';
 
       if (!name) continue;

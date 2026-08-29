@@ -59,7 +59,7 @@
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </a>
-        <div class="header__dropdown-menu">
+        <div class="header__dropdown-menu header__dropdown-menu--marcas">
           <a routerLink="/marcas/hills-pd" class="header__dropdown-item header__dropdown-item--image">
             <img src="assets/logos/hills-logo.png" alt="Hill's PD" class="dropdown-item-logo"> Hill's PD
           </a>
@@ -86,6 +86,21 @@
           </a>
           <a routerLink="/marcas/ricocan" class="header__dropdown-item header__dropdown-item--image">
             <img src="assets/logos/ricocan-logo.png" alt="Ricocan" class="dropdown-item-logo"> Ricocan
+          </a>
+          <a routerLink="/marcas/origen" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/origen-logo.png" alt="Origen" class="dropdown-item-logo"> Origen
+          </a>
+          <a routerLink="/marcas/dr-clauders" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/dr-clauders-logo.png" alt="Dr. Clauder's" class="dropdown-item-logo"> Dr. Clauder's
+          </a>
+          <a routerLink="/marcas/brit-vet-diets" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/brit-vet-diets-logo.png" alt="Brit Vet Diets" class="dropdown-item-logo"> Brit Vet Diets
+          </a>
+          <a routerLink="/marcas/equilibrio" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/equilibrio-logo.png" alt="Equilibrio" class="dropdown-item-logo"> Equilibrio
+          </a>
+          <a routerLink="/marcas/vet-solution" class="header__dropdown-item header__dropdown-item--image">
+            <img src="assets/logos/vet-solution-logo.png" alt="Vet Solution" class="dropdown-item-logo"> Vet Solution
           </a>
         </div>
       </div>
@@ -205,7 +220,7 @@
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
-        <div class="mobile-subnav" [class.open]="expandedMenu() === 'marcas'">
+        <div class="mobile-subnav mobile-subnav--grid" [class.open]="expandedMenu() === 'marcas'">
           <a routerLink="/marcas/hills-pd" class="mobile-sublink" (click)="closeMenu()">Hill's PD</a>
           <a routerLink="/marcas/hills-sd" class="mobile-sublink" (click)="closeMenu()">Hill's SD</a>
           <a routerLink="/marcas/nutram" class="mobile-sublink" (click)="closeMenu()">Nutram</a>
@@ -215,6 +230,11 @@
           <a routerLink="/marcas/brit-premium" class="mobile-sublink" (click)="closeMenu()">Brit Premium</a>
           <a routerLink="/marcas/canbo" class="mobile-sublink" (click)="closeMenu()">Canbo</a>
           <a routerLink="/marcas/ricocan" class="mobile-sublink" (click)="closeMenu()">Ricocan</a>
+          <a routerLink="/marcas/origen" class="mobile-sublink" (click)="closeMenu()">Origen</a>
+          <a routerLink="/marcas/dr-clauders" class="mobile-sublink" (click)="closeMenu()">Dr. Clauder's</a>
+          <a routerLink="/marcas/brit-vet-diets" class="mobile-sublink" (click)="closeMenu()">Brit Vet Diets</a>
+          <a routerLink="/marcas/equilibrio" class="mobile-sublink" (click)="closeMenu()">Equilibrio</a>
+          <a routerLink="/marcas/vet-solution" class="mobile-sublink" (click)="closeMenu()">Vet Solution</a>
         </div>
       </div>
 

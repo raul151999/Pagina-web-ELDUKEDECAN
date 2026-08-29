@@ -9,6 +9,7 @@
       placeholder="Busca tus marcas y productos favoritos..." 
       [value]="searchQuery()"
       (input)="onSearchInputEvent($event)"
+      (keyup.enter)="onEnterPressed()"
       (focus)="onSearchInput()"
       (blur)="hideSuggestions()"
     />

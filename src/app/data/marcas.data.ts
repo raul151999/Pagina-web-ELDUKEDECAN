@@ -23,6 +23,7 @@ export interface Marca {
   name: string;
   description: string;
   logo: string;
+  banner?: string;
   products: Product[];
 }
 
@@ -158,6 +159,7 @@ export const MARCAS_DATA: Record<string, Marca> = {
     name: 'Canbo',
     description: 'Nutrición súper premium diseñada para las exigencias de nuestras mascotas.',
     logo: 'assets/logos/canbo-logo.png',
+    banner: 'assets/banners/canbo-banner.png',
     products: [
       { name: 'Canbo Cachorro Razas Pequeñas', description: 'Pollo y arroz - Seco 3 kg', price: 'S/ 85.00', icon: '🐕', animal: 'perro' },
       { name: 'Canbo Cachorro Razas Medianas/Grandes', description: 'Pollo y arroz - Seco 15 kg', price: 'S/ 250.00', icon: '🐕', animal: 'perro' },
@@ -174,6 +176,7 @@ export const MARCAS_DATA: Record<string, Marca> = {
     name: 'Ricocan',
     description: 'Alimento completo y balanceado para el desarrollo y vitalidad.',
     logo: 'assets/logos/ricocan-logo.png',
+    banner: 'assets/banners/ricocan-banner.png',
     products: [
       { name: 'Ricocan Cachorro Carne y Leche', description: 'Seco 3 kg', price: 'S/ 35.00', icon: '🐕', animal: 'perro' },
       { name: 'Ricocan Cachorro Carne y Leche', description: 'Seco 15 kg', price: 'S/ 140.00', icon: '🐕', animal: 'perro' },

@@ -6,7 +6,12 @@
   </div>
   } @else {
   @if (marca(); as m) {
-  <!-- Hero Header -->
+  <!-- Hero Header / Banner -->
+  @if (m.banner) {
+  <div class="detalle-page__banner">
+    <img [src]="m.banner" [alt]="m.name" class="detalle-page__banner-img" />
+  </div>
+  } @else {
   <div class="detalle-page__hero">
     <div class="container">
       <div class="detalle-page__hero-content">
@@ -22,6 +27,7 @@
       </div>
     </div>
   </div>
+  }
 
   <!-- Products -->
   <div class="container detalle-page__body">
@@ -141,29 +147,24 @@
 
       <!-- Paginación estilo Google -->
       @if (totalPages() > 1) {
-        <div class="google-pagination">
-          <button class="page-btn text-btn" 
-                  [disabled]="currentPage() === 1" 
-                  (click)="goToPage(currentPage() - 1)">
-            Anterior
-          </button>
-          
-          <div class="page-numbers">
-            @for (p of pagesArray(); track p) {
-              <button class="page-btn num-btn" 
-                      [class.active]="currentPage() === p"
-                      (click)="goToPage(p)">
-                {{ p }}
-              </button>
-            }
-          </div>
+      <div class="google-pagination">
+        <button class="page-btn text-btn" [disabled]="currentPage() === 1" (click)="goToPage(currentPage() - 1)">
+          Anterior
+        </button>
 
-          <button class="page-btn text-btn" 
-                  [disabled]="currentPage() === totalPages()" 
-                  (click)="goToPage(currentPage() + 1)">
-            Siguiente
+        <div class="page-numbers">
+          @for (p of pagesArray(); track p) {
+          <button class="page-btn num-btn" [class.active]="currentPage() === p" (click)="goToPage(p)">
+            {{ p }}
           </button>
+          }
         </div>
+
+        <button class="page-btn text-btn" [disabled]="currentPage() === totalPages()"
+          (click)="goToPage(currentPage() + 1)">
+          Siguiente
+        </button>
+      </div>
       }
     </div>
 

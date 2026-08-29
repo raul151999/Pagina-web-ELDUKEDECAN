@@ -1,7 +1,23 @@
 .detalle-page {
   padding-bottom: var(--space-16);
+  margin-top: var(--header-height);
 }
 
+/* --- Banner Header --- */
+.detalle-page__banner {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: var(--space-12);
+}
+
+.detalle-page__banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Hero Header (Fallback) --- */
 .detalle-page__hero {
   padding: var(--space-16) 0 var(--space-20);
   background: var(--gradient-brand);

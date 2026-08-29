@@ -72,8 +72,8 @@ export class GoogleSheetsService {
       "Brit Premium": { id: 'brit-premium', desc: 'Excelente palatabilidad y digestibilidad con alta proteína.', logo: 'assets/logos/brit-premium-logo.png' },
       "Nutram": { id: 'nutram', desc: 'Recetas holísticas y naturales que optimizan la salud.', logo: 'assets/logos/nutram-logo.png' },
       "Monge": { id: 'monge', desc: 'La máxima calidad de la nutrición italiana.', logo: 'assets/logos/monge-logo.png' },
-      "Canbo": { id: 'canbo', desc: 'Nutrición súper premium diseñada para exigencias especiales.', logo: 'assets/logos/canbo-logo.png' },
-      "Ricocan": { id: 'ricocan', desc: 'Alimento completo y balanceado.', logo: 'assets/logos/ricocan-logo.png' },
+      "Canbo": { id: 'canbo', desc: 'Nutrición súper premium diseñada para exigencias especiales.', logo: 'assets/logos/canbo-logo.png', banner: 'assets/banners/canbo-banner.png' },
+      "Ricocan": { id: 'ricocan', desc: 'Alimento completo y balanceado.', logo: 'assets/logos/ricocan-logo.png', banner: 'assets/banners/ricocan-banner.png' },
       "Ricocat": { id: 'ricocan', desc: 'Alimento completo y balanceado.', logo: 'assets/logos/ricocan-logo.png' }
     };
 

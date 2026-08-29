@@ -112,18 +112,18 @@
 
   /* Layout */
   --container-max: 1280px;
-  --header-height: 140px;
+  --header-height: 124px;
 }
 
 @media (max-width: 1024px) {
   :root {
-    --header-height: 190px;
+    --header-height: 160px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --header-height: 170px;
+    --header-height: 160px;
   }
 }
 

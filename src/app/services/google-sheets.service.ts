@@ -67,19 +67,19 @@ export class GoogleSheetsService {
     const baseConfig: Record<string, any> = {
       "Hill's PD": { id: 'hills-pd', desc: 'Nutrición clínica de vanguardia para tratar diversas condiciones de salud.', logo: 'assets/logos/hills-logo.png' },
       "Hill's SD": { id: 'hills-sd', desc: 'Nutrición basada en la biología para anticiparse a sus necesidades.', logo: 'assets/logos/hills-logo.png' },
-      "Pro Plan": { id: 'proplan', desc: 'Nutrición de última generación respaldada por científicos.', logo: 'assets/logos/pro-plan-logo.png' },
-      "Brit Care": { id: 'brit-care', desc: 'Fórmulas hipoalergénicas para el máximo cuidado.', logo: 'assets/logos/brit-care-logo.png' },
-      "Brit Premium": { id: 'brit-premium', desc: 'Excelente palatabilidad y digestibilidad con alta proteína.', logo: 'assets/logos/brit-premium-logo.png' },
+      "Pro Plan": { id: 'proplan', desc: 'Nutrición de última generación respaldada por científicos.', logo: 'assets/logos/pro-plan-logo.png', banner: 'assets/banners/proplan-banner.png' },
+      "Brit Care": { id: 'brit-care', desc: 'Fórmulas hipoalergénicas para el máximo cuidado.', logo: 'assets/logos/brit-care-logo.png', banner: 'assets/banners/brit-care-banner.png' },
+      "Brit Premium": { id: 'brit-premium', desc: 'Excelente palatabilidad y digestibilidad con alta proteína.', logo: 'assets/logos/brit-premium-logo.png', banner: 'assets/banners/brit-premium-banner.png' },
       "Nutram": { id: 'nutram', desc: 'Recetas holísticas y naturales que optimizan la salud.', logo: 'assets/logos/nutram-logo.png' },
       "Monge": { id: 'monge', desc: 'La máxima calidad de la nutrición italiana.', logo: 'assets/logos/monge-logo.png' },
       "Canbo": { id: 'canbo', desc: 'Nutrición súper premium diseñada para exigencias especiales.', logo: 'assets/logos/canbo-logo.png', banner: 'assets/banners/canbo-banner.png' },
       "Ricocan": { id: 'ricocan', desc: 'Alimento completo y balanceado.', logo: 'assets/logos/ricocan-logo.png', banner: 'assets/banners/ricocan-banner.png' },
       "Ricocat": { id: 'ricocan', desc: 'Alimento completo y balanceado.', logo: 'assets/logos/ricocan-logo.png' },
-      "Origen": { id: 'origen', desc: 'Alimentación biológicamente apropiada.', logo: 'assets/logos/origen-logo.png' },
-      "Dr. Clauder's": { id: 'dr-clauders', desc: 'Nutrición super premium alemana.', logo: 'assets/logos/dr-clauders-logo.png' },
-      "Brit Vet Diets": { id: 'brit-vet-diets', desc: 'Nutrición clínica avanzada.', logo: 'assets/logos/brit-vet-diets-logo.png' },
-      "Equilibrio": { id: 'equilibrio', desc: 'Nutrición super premium de alto rendimiento.', logo: 'assets/logos/equilibrio-logo.png' },
-      "Vet Solution": { id: 'vet-solution', desc: 'Dietas veterinarias especializadas.', logo: 'assets/logos/vet-solution-logo.png' }
+      "Orijen": { id: 'orijen', desc: 'Alimentación biológicamente apropiada.', logo: 'assets/logos/orijen-logo.jpg' },
+      "Dr. Clauder's": { id: 'dr-clauders', desc: 'Nutrición super premium alemana.', logo: 'assets/logos/dr-clauders-logo.jpg' },
+      "Brit Vet Diets": { id: 'brit-vet-diets', desc: 'Nutrición clínica avanzada.', logo: 'assets/logos/brit-vet-diets-logo.jpg' },
+      "Equilibrio": { id: 'equilibrio', desc: 'Nutrición super premium de alto rendimiento.', logo: 'assets/logos/equilibrio-logo.jpg' },
+      "Vet Solution": { id: 'vet-solution', desc: 'Dietas veterinarias especializadas.', logo: 'assets/logos/vet-solution-logo.jpg' }
     };
 
     // Saltar la cabecera (índice 0)

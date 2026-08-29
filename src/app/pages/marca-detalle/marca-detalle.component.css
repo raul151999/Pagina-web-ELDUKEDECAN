@@ -9,11 +9,14 @@
   position: relative;
   overflow: hidden;
   margin-bottom: var(--space-12);
+  margin-top: -2px; /* Pull it slightly under the fixed header to hide any sub-pixel gap */
 }
 
 .detalle-page__banner-img {
   width: 100%;
-  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center;
   display: block;
 }
 

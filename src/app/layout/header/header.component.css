@@ -306,7 +306,7 @@
   width: 100%;
   height: 100vh;
   background: var(--color-white);
-  padding: calc(var(--header-height) + var(--space-8)) var(--space-6) var(--space-8);
+  padding: 100px var(--space-6) var(--space-8);
   display: flex;
   flex-direction: column;
   transform: translateX(100%);

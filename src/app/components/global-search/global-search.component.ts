@@ -6,7 +6,7 @@ import { GoogleSheetsService } from '../../services/google-sheets.service';
 import { Product, ProductVariant, Marca, OtrasMascotasProduct } from '../../data/marcas.data';
 
 export interface SearchableProduct {
-  type: 'marca' | 'otra';
+  type: 'marca' | 'otra' | 'pagina';
   id: string;
   name: string;
   description: string;
@@ -16,6 +16,7 @@ export interface SearchableProduct {
   category: string; // Nombre de la marca o "Otras Mascotas"
   originalData: any; // Product o OtrasMascotasProduct
   brandData?: Marca; 
+  url?: string;
 }
 
 @Component({
@@ -53,12 +54,35 @@ export class GlobalSearchComponent implements OnInit {
       const catNorm = p.category.toLowerCase().replace(/'/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       const descNorm = p.description ? p.description.toLowerCase().replace(/'/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "") : '';
       
-      const fullText = `${nameNorm} ${catNorm} ${descNorm}`;
+      let keywords = '';
+      if (p.type === 'pagina' && p.originalData?.keywords) {
+        keywords = p.originalData.keywords.toLowerCase();
+      }
+
+      const fullText = `${nameNorm} ${catNorm} ${descNorm} ${keywords}`;
       
       // Tiene que contener TODAS las palabras que el usuario escribió
       return queryWords.every(word => fullText.includes(word));
     }).slice(0, 8); // Limit to 8 suggestions
   });
+
+  private SITE_PAGES = [
+    { id: 'p-consulta', name: 'Consulta Veterinaria', desc: 'Reserva una consulta médica para tu mascota', keywords: 'consulta veterinaria doctor medico chequeo cita clinica', url: '/servicios/consulta-veterinaria', icon: '🩺' },
+    { id: 'p-grooming', name: 'Baño y Grooming', desc: 'Servicios de peluquería y spa', keywords: 'bano corte grooming spa peluqueria estetica limpieza', url: '/servicios/grooming', icon: '✂️' },
+    { id: 'p-vacunacion', name: 'Vacunación', desc: 'Protege a tu mascota con sus vacunas al día', keywords: 'vacunacion vacunas inyeccion preventivo', url: '/servicios/vacunacion', icon: '💉' },
+    { id: 'p-cirugia', name: 'Cirugía', desc: 'Intervenciones quirúrgicas seguras', keywords: 'cirugia operacion esterilizacion castracion quirofano', url: '/servicios/cirugia', icon: '🏥' },
+    { id: 'p-desparasitacion', name: 'Desparasitación', desc: 'Elimina parásitos internos y externos', keywords: 'desparasitacion parasitos pulgas garrapatas pastilla', url: '/servicios/desparasitacion', icon: '🐛' },
+    { id: 'p-laboratorio', name: 'Laboratorio Clínico', desc: 'Análisis de sangre, orina y heces', keywords: 'laboratorio analisis sangre orina heces examen', url: '/servicios/laboratorio-clinico', icon: '🔬' },
+    { id: 'p-rayosx', name: 'Rayos X y Ecografía', desc: 'Imágenes diagnósticas de alta resolución', keywords: 'rayos x ecografia radiografia imagenes ultrasonido', url: '/servicios/rayosx-ecografia', icon: '🦴' },
+    { id: 'p-farmacia', name: 'Farmacia Veterinaria', desc: 'Medicamentos y productos veterinarios', keywords: 'farmacia pastillas medicamentos remedios botica receta', url: '/farmacia', icon: '💊' },
+    { id: 'p-ofertas', name: 'Ofertas y Promociones', desc: 'Descuentos exclusivos y combos', keywords: 'ofertas promociones descuentos combos barato rebajas', url: '/ofertas', icon: '🎁' },
+    { id: 'p-accesorios', name: 'Accesorios para Mascotas', desc: 'Juguetes, camas, collares y más', keywords: 'accesorios juguetes camas ropa collares correas', url: '/accesorios', icon: '🧸' },
+    { id: 'p-contacto', name: 'Agenda / Contacto', desc: 'Contáctanos o visítanos', keywords: 'agenda contacto ubicacion telefono whatsapp direccion mensaje cita', url: '/agenda-una-cita', icon: '📅' },
+    { id: 'p-historia', name: 'Nuestra Historia', desc: 'Conoce más sobre nosotros', keywords: 'historia nosotros quienes somos clinica', url: '/nuestra-historia', icon: '🏥' },
+    { id: 'p-equipo', name: 'Nuestro Equipo', desc: 'Conoce a nuestros veterinarios y groomers', keywords: 'equipo veterinarios groomers staff personal doctores', url: '/veterinarios', icon: '👥' },
+    { id: 'p-otras-mascotas', name: 'Otras Mascotas', desc: 'Alimentos y productos para otras mascotas', keywords: 'otras mascotas conejos hamsters aves roedores peces', url: '/otras-mascotas', icon: '🐹' },
+    { id: 'p-reclamos', name: 'Reclamos y Quejas', desc: 'Libro de reclamaciones', keywords: 'reclamos quejas libro reclamaciones problema', url: '/reclamos-y-quejas', icon: '📖' }
+  ];
 
   async ngOnInit() {
     // Load all products in background
@@ -131,6 +155,20 @@ export class GlobalSearchComponent implements OnInit {
       });
     });
     
+    // Parse Pages
+    this.SITE_PAGES.forEach(page => {
+      products.push({
+        type: 'pagina',
+        id: page.id,
+        name: page.name,
+        description: page.desc,
+        price: '',
+        icon: page.icon,
+        category: 'Sección de la web',
+        originalData: page,
+        url: page.url
+      });
+    });
 
     this.allProducts.set(products);
   }
@@ -193,7 +231,14 @@ export class GlobalSearchComponent implements OnInit {
   selectSuggestion(item: SearchableProduct) {
     this.searchQuery.set('');
     this.showSuggestions.set(false);
-    this.openModal(item);
+    
+    if (item.type === 'pagina') {
+      if (item.url) {
+        this.router.navigateByUrl(item.url);
+      }
+    } else {
+      this.openModal(item);
+    }
   }
 
   // --- Modal Logic ---

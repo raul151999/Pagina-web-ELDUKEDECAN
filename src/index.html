@@ -13,6 +13,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Netlify Hidden Form for Reclamos -->
+  <form name="reclamos" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="nombres" />
+    <input type="text" name="apellidos" />
+    <input type="text" name="dni" />
+    <input type="email" name="correo" />
+    <input type="tel" name="celular" />
+    <input type="text" name="domicilio" />
+    <input type="text" name="referencia" />
+    <select name="tipo_bien"></select>
+    <select name="categoria"></select>
+    <select name="sede"></select>
+    <input type="text" name="colaborador" />
+    <input type="text" name="mascota" />
+    <select name="motivo"></select>
+    <textarea name="detalle"></textarea>
+  </form>
   <app-root></app-root>
 </body>
 </html>

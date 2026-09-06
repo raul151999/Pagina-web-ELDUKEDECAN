@@ -7,125 +7,144 @@
 
   <!-- Formulario -->
   <div class="form-container">
-    <form>
-      <!-- Sección 1 -->
-      <div class="form-section">
-        <h3 class="form-section__title">1. Identificación del consumidor reclamante</h3>
-        <p class="form-section__subtitle">Rellene el siguiente formulario a continuación</p>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Nombres <span>(obligatorio)</span></label>
-            <input type="text" class="form-input" required>
+    @if (isSuccess()) {
+      <div class="success-message" style="text-align: center; padding: 60px 20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px;">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <h2 style="color: var(--color-primary-dark); font-size: 2rem; margin-bottom: 12px;">¡Reclamo enviado con éxito!</h2>
+        <p style="color: var(--color-gray-600); font-size: 1.1rem;">Hemos recibido su reclamo/queja de manera conforme. Nos pondremos en contacto con usted a la brevedad posible.</p>
+      </div>
+    } @else {
+      <form (ngSubmit)="onSubmit()" #reclamosForm="ngForm">
+        @if (isError()) {
+          <div style="background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+            Ocurrió un error al enviar el formulario. Por favor, inténtelo de nuevo.
           </div>
+        }
+
+        <!-- Sección 1 -->
+        <div class="form-section">
+          <h3 class="form-section__title">1. Identificación del consumidor reclamante</h3>
+          <p class="form-section__subtitle">Rellene el siguiente formulario a continuación</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Nombres <span>(obligatorio)</span></label>
+              <input type="text" class="form-input" name="nombres" [(ngModel)]="form.nombres" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Apellidos <span>(obligatorio)</span></label>
+              <input type="text" class="form-input" name="apellidos" [(ngModel)]="form.apellidos" required>
+            </div>
+          </div>
+
           <div class="form-group">
-            <label class="form-label">Apellidos <span>(obligatorio)</span></label>
-            <input type="text" class="form-input" required>
+            <label class="form-label">DNI/C.E <span>(obligatorio)</span></label>
+            <input type="text" class="form-input" name="dni" [(ngModel)]="form.dni" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Correo electrónico <span>(obligatorio)</span></label>
+            <input type="email" class="form-input" name="correo" [(ngModel)]="form.correo" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Celular <span>(obligatorio)</span></label>
+            <input type="tel" class="form-input" name="celular" [(ngModel)]="form.celular" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Domicilio <span>(obligatorio)</span></label>
+            <input type="text" class="form-input" name="domicilio" [(ngModel)]="form.domicilio" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Referencia <span>(obligatorio)</span></label>
+            <input type="text" class="form-input" name="referencia" [(ngModel)]="form.referencia" required>
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">DNI/C.E <span>(obligatorio)</span></label>
-          <input type="text" class="form-input" required>
+        <!-- Sección 2 -->
+        <div class="form-section">
+          <h3 class="form-section__title">2. Identificación del bien contratado</h3>
+
+          <div class="form-group">
+            <label class="form-label">Tipo de bien <span>(obligatorio)</span></label>
+            <select class="form-input" name="tipo_bien" [(ngModel)]="form.tipo_bien" required>
+              <option value="" disabled selected>Seleccionar una opción</option>
+              <option value="producto">Producto</option>
+              <option value="servicio">Servicio</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Categoría <span>(obligatorio)</span></label>
+            <select class="form-input" name="categoria" [(ngModel)]="form.categoria" required>
+              <option value="" disabled selected>Seleccionar una opción</option>
+              <option value="clinica">Clínica</option>
+              <option value="petshop">Petshop</option>
+              <option value="grooming">Grooming / Spa</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Sede <span>(obligatorio)</span></label>
+            <select class="form-input" name="sede" [(ngModel)]="form.sede" required>
+              <option value="" disabled selected>Seleccionar una opción</option>
+              <option value="fatima">Fátima</option>
+              <option value="primavera">Primavera</option>
+              <option value="magnolias">Las Magnolias</option>
+              <option value="larco">Larco</option>
+              <option value="huanchaco">Huanchaco</option>
+              <option value="san_andres">San Andrés</option>
+              <option value="mansiche">Mansiche</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Nombre del colaborador a cargo de la atención brindada <span>(obligatorio)</span></label>
+            <input type="text" class="form-input" name="colaborador" [(ngModel)]="form.colaborador" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Datos de tu mascota (Nombre, raza y edad)</label>
+            <input type="text" class="form-input" name="mascota" [(ngModel)]="form.mascota">
+          </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Correo electrónico <span>(obligatorio)</span></label>
-          <input type="email" class="form-input" required>
+        <!-- Sección 3 -->
+        <div class="form-section">
+          <h3 class="form-section__title">3. Detalle de reclamo</h3>
+
+          <div class="form-group">
+            <label class="form-label">Motivo <span>(obligatorio)</span></label>
+            <select class="form-input" name="motivo" [(ngModel)]="form.motivo" required>
+              <option value="" disabled selected>Seleccionar una opción</option>
+              <option value="reclamo">Reclamo</option>
+              <option value="queja">Queja</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Detalle de queja/reclamo. Explícanos, ¿Qué fue lo que sucedió? <span>(obligatorio)</span></label>
+            <textarea class="form-input" name="detalle" [(ngModel)]="form.detalle" required></textarea>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Celular <span>(obligatorio)</span></label>
-          <input type="tel" class="form-input" required>
+        <div class="checkbox-group">
+          <input type="checkbox" id="declaracion" name="declaracion" required>
+          <label for="declaracion">
+            Declaro ser el usuario del servicio o producto y acepto el contenido del presente formulario manifestando bajo Declaración Jurada la veracidad de los hechos descritos. <span>(obligatorio)</span>
+          </label>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Domicilio <span>(obligatorio)</span></label>
-          <input type="text" class="form-input" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Referencia <span>(obligatorio)</span></label>
-          <input type="text" class="form-input" required>
-        </div>
-      </div>
-
-      <!-- Sección 2 -->
-      <div class="form-section">
-        <h3 class="form-section__title">2. Identificación del bien contratado</h3>
-
-        <div class="form-group">
-          <label class="form-label">Tipo de bien <span>(obligatorio)</span></label>
-          <select class="form-input" required>
-            <option value="" disabled selected>Seleccionar una opción</option>
-            <option value="producto">Producto</option>
-            <option value="servicio">Servicio</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Categoría <span>(obligatorio)</span></label>
-          <select class="form-input" required>
-            <option value="" disabled selected>Seleccionar una opción</option>
-            <option value="clinica">Clínica</option>
-            <option value="petshop">Petshop</option>
-            <option value="grooming">Grooming / Spa</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Sede <span>(obligatorio)</span></label>
-          <select class="form-input" required>
-            <option value="" disabled selected>Seleccionar una opción</option>
-            <option value="fatima">Fátima</option>
-            <option value="primavera">Primavera</option>
-            <option value="magnolias">Las Magnolias</option>
-            <option value="larco">Larco</option>
-            <option value="huanchaco">Huanchaco</option>
-            <option value="san_andres">San Andrés</option>
-            <option value="mansiche">Mansiche</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Nombre del colaborador a cargo de la atención brindada <span>(obligatorio)</span></label>
-          <input type="text" class="form-input" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Datos de tu mascota (Nombre, raza y edad)</label>
-          <input type="text" class="form-input">
-        </div>
-      </div>
-
-      <!-- Sección 3 -->
-      <div class="form-section">
-        <h3 class="form-section__title">3. Detalle de reclamo</h3>
-
-        <div class="form-group">
-          <label class="form-label">Motivo <span>(obligatorio)</span></label>
-          <select class="form-input" required>
-            <option value="" disabled selected>Seleccionar una opción</option>
-            <option value="reclamo">Reclamo</option>
-            <option value="queja">Queja</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Detalle de queja/reclamo. Explícanos, ¿Qué fue lo que sucedió? <span>(obligatorio)</span></label>
-          <textarea class="form-input" required></textarea>
-        </div>
-      </div>
-
-      <div class="checkbox-group">
-        <input type="checkbox" id="declaracion" required>
-        <label for="declaracion">
-          Declaro ser el usuario del servicio o producto y acepto el contenido del presente formulario manifestando bajo Declaración Jurada la veracidad de los hechos descritos. <span>(obligatorio)</span>
-        </label>
-      </div>
-
-      <button type="submit" class="btn-submit">Enviar</button>
-    </form>
+        <button type="submit" class="btn-submit" [disabled]="!reclamosForm.form.valid || isSubmitting()">
+          {{ isSubmitting() ? 'Enviando...' : 'Enviar' }}
+        </button>
+      </form>
+    }
   </div>
 
   <!-- WhatsApp Banner -->

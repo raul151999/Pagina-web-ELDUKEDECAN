@@ -168,17 +168,7 @@
               <a routerLink="/nuestra-historia" class="header__dropdown-item" (click)="closeMenu()">Nuestra historia</a>
               <a routerLink="/nuestro-proposito" class="header__dropdown-item" (click)="closeMenu()">Nuestro propósito</a>
               
-              <!-- Nuestro equipo (Nested 2) -->
-              <div class="header__nested-dropdown">
-                <a class="header__dropdown-item header__nested-trigger" style="cursor: pointer;">
-                  Nuestro equipo
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                </a>
-                <div class="header__nested-menu">
-                  <a routerLink="/groomers" class="header__dropdown-item" (click)="closeMenu()">Groomers</a>
-                  <a routerLink="/veterinarios" class="header__dropdown-item" (click)="closeMenu()">Médicos veterinarios</a>
-                </div>
-              </div>
+
             </div>
           </div>
           
@@ -273,8 +263,7 @@
         <div class="mobile-subnav" [class.open]="expandedMenu() === 'mas'">
           <a routerLink="/nuestra-historia" class="mobile-sublink" (click)="closeMenu()">Nuestra historia</a>
           <a routerLink="/nuestro-proposito" class="mobile-sublink" (click)="closeMenu()">Nuestro propósito</a>
-          <a routerLink="/groomers" class="mobile-sublink" (click)="closeMenu()">Equipo: Groomers</a>
-          <a routerLink="/veterinarios" class="mobile-sublink" (click)="closeMenu()">Equipo: Veterinarios</a>
+
           <a routerLink="/agenda-una-cita" class="mobile-sublink" (click)="closeMenu()">Agenda una cita</a>
           <a routerLink="/contactanos" class="mobile-sublink" (click)="closeMenu()">Contáctanos</a>
           <a routerLink="/reclamos-y-quejas" class="mobile-sublink" (click)="closeMenu()">Reclamos y quejas</a>

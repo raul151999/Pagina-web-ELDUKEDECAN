@@ -72,17 +72,17 @@
       Cada día trabajamos con pasión y cariño para cuidar a nuestras mascotas y brindar la
       tranquilidad que merecen sus familias.
     </p>
-    <div class="hero__values-grid">
+    <div class="hero__values-grid" #statsSection>
       <div class="hero__value-card reveal-up">
-        <div class="hero__value-num">+20</div>
+        <div class="hero__value-num">+{{ expYears() }}</div>
         <div class="hero__value-label">Años de experiencia</div>
       </div>
       <div class="hero__value-card reveal-up" style="transition-delay: 200ms;">
-        <div class="hero__value-num">7</div>
+        <div class="hero__value-num">{{ branches() }}</div>
         <div class="hero__value-label">Sedes en Trujillo</div>
       </div>
-      <div class="hero__value-card">
-        <div class="hero__value-num">+10</div>
+      <div class="hero__value-card reveal-up" style="transition-delay: 400ms;">
+        <div class="hero__value-num">+{{ partners() }}</div>
         <div class="hero__value-label">Alianzas comerciales</div>
       </div>
     </div>

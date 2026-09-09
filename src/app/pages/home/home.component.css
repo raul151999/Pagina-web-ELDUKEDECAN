@@ -7,10 +7,9 @@
 /* ============================================================== */
 .promo-banner-container {
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  margin-top: var(--header-height);
-  padding: 20px;
+  margin: 0;
+  margin-top: calc(var(--header-height) - 2px); /* Se ajusta exactamente debajo del header */
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,20 +17,18 @@
 
 .promo-banner-img {
   width: 100%;
-  max-height: 150px;
+  height: auto;
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: block;
 }
 
 /* Ajustes para celulares */
 @media (max-width: 768px) {
   .promo-banner-container {
-    padding: 10px 15px;
+    padding: 0;
   }
   .promo-banner-img {
-    max-height: 100px;
+    height: auto;
   }
 }
 /* ============================================================== */

@@ -37,7 +37,7 @@ export class ReclamosQuejasComponent {
     try {
       const formData = new URLSearchParams();
       formData.append('form-name', 'reclamos');
-      
+
       // Append all fields
       Object.entries(this.form).forEach(([key, value]) => {
         formData.append(key, value);

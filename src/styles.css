@@ -18,7 +18,7 @@
   --gradient-brand-hover: linear-gradient(135deg, #009e89 0%, #0f766e 50%, #8bd42a 100%);
   --gradient-hero: linear-gradient(160deg, #00c2a8 0%, #0f766e 40%, #14b8a6 100%);
   --gradient-dark: linear-gradient(180deg, #0a1a1f 0%, #0d2b33 50%, #0a1a1f 100%);
-  --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
 
   /* Neutrals */
   --color-white: #ffffff;
@@ -117,13 +117,13 @@
 
 @media (max-width: 1024px) {
   :root {
-    --header-height: 190px;
+    --header-height: 180px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --header-height: 190px;
+    --header-height: 180px;
   }
 }
 
@@ -150,7 +150,7 @@ body {
   color: var(--color-gray-800);
   background: var(--color-gray-50);
   background-image: radial-gradient(rgba(2, 199, 176, 0.03) 2px, transparent 2px),
-                    radial-gradient(rgba(0, 74, 89, 0.03) 2px, transparent 2px);
+    radial-gradient(rgba(0, 74, 89, 0.03) 2px, transparent 2px);
   background-size: 60px 60px;
   background-position: 0 0, 30px 30px;
   animation: moveBackground 90s linear infinite;
@@ -181,13 +181,23 @@ body::before {
 }
 
 @keyframes pulseLogo {
-  0% { transform: translate(-50%, -50%) scale(1) rotate(-5deg); }
-  100% { transform: translate(-50%, -50%) scale(1.05) rotate(5deg); }
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(-5deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1.05) rotate(5deg);
+  }
 }
 
 @keyframes moveBackground {
-  0% { background-position: 0 0, 30px 30px; }
-  100% { background-position: 600px 600px, 630px 630px; }
+  0% {
+    background-position: 0 0, 30px 30px;
+  }
+
+  100% {
+    background-position: 600px 600px, 630px 630px;
+  }
 }
 
 img,
@@ -224,7 +234,12 @@ ol {
   list-style: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   line-height: 1.2;
   font-weight: 700;
@@ -402,6 +417,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -409,8 +425,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideInLeft {
@@ -418,6 +439,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0;
     transform: translateX(-40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -429,6 +451,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0;
     transform: translateX(40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -440,6 +463,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -447,35 +471,77 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes bounceIn {
-  0% { opacity: 0; transform: scale(0.3); }
-  50% { opacity: 1; transform: scale(1.05); }
-  70% { transform: scale(0.95); }
-  100% { transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  70% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Scroll-triggered animation utility classes */
@@ -491,15 +557,41 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Stagger children animation delays */
-.stagger-children > *:nth-child(1) { transition-delay: 0ms; }
-.stagger-children > *:nth-child(2) { transition-delay: 100ms; }
-.stagger-children > *:nth-child(3) { transition-delay: 200ms; }
-.stagger-children > *:nth-child(4) { transition-delay: 300ms; }
-.stagger-children > *:nth-child(5) { transition-delay: 400ms; }
-.stagger-children > *:nth-child(6) { transition-delay: 500ms; }
-.stagger-children > *:nth-child(7) { transition-delay: 600ms; }
-.stagger-children > *:nth-child(8) { transition-delay: 700ms; }
-.stagger-children > *:nth-child(9) { transition-delay: 800ms; }
+.stagger-children>*:nth-child(1) {
+  transition-delay: 0ms;
+}
+
+.stagger-children>*:nth-child(2) {
+  transition-delay: 100ms;
+}
+
+.stagger-children>*:nth-child(3) {
+  transition-delay: 200ms;
+}
+
+.stagger-children>*:nth-child(4) {
+  transition-delay: 300ms;
+}
+
+.stagger-children>*:nth-child(5) {
+  transition-delay: 400ms;
+}
+
+.stagger-children>*:nth-child(6) {
+  transition-delay: 500ms;
+}
+
+.stagger-children>*:nth-child(7) {
+  transition-delay: 600ms;
+}
+
+.stagger-children>*:nth-child(8) {
+  transition-delay: 700ms;
+}
+
+.stagger-children>*:nth-child(9) {
+  transition-delay: 800ms;
+}
 
 /* --- Scrollbar Styling --- */
 ::-webkit-scrollbar {
@@ -631,7 +723,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   display: inline-flex;
   align-items: center;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .modal-brand-logo {
@@ -906,7 +998,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.1rem;
   font-weight: 700;
   border-radius: 8px;
-  background-color: #E3000F; /* Superpet Red */
+  background-color: #E3000F;
+  /* Superpet Red */
   color: white;
   text-decoration: none;
   transition: background 0.2s;
@@ -917,33 +1010,50 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @media (max-width: 768px) {
   .modal-grid {
     grid-template-columns: 1fr;
   }
+
   .modal-image-col {
     padding: 20px;
     border-right: none;
     border-bottom: 1px solid var(--color-gray-200);
   }
+
   .modal-product-img {
     max-height: 250px;
   }
+
   .modal-info-col {
     padding: 25px 20px;
   }
+
   .modal-product-title {
     font-size: 1.5rem;
   }
+
   .modal-price {
     font-size: 2rem;
   }

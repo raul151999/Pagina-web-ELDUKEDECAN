@@ -4,7 +4,6 @@
 
 .hero {
   background: var(--color-white);
-  padding-top: var(--header-height);
   padding-bottom: var(--space-8);
 }
 
